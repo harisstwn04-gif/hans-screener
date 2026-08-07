@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans Screaming Saham - Pro Screener</title>
+    <title>Hans Screaming Saham - Professional Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { darkbg: '#0f172a', cardbg: '#1e293b', accent: '#3b82f6' }
+                    colors: { darkbg: '#0b0f19', cardbg: '#111827', accent: '#3b82f6', borderdark: '#1f2937' }
                 }
             }
         }
@@ -22,18 +22,18 @@
 
     <!-- LOCK SCREEN -->
     <div id="lockScreen" class="fixed inset-0 bg-darkbg z-50 flex items-center justify-center p-4">
-        <div class="bg-cardbg border border-slate-700 p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
-            <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-lock"></i>
+        <div class="bg-cardbg border border-borderdark p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
+            <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+                <i class="fa-solid fa-shield-halved"></i>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Hans Screaming Saham</h2>
-            <p class="text-slate-400 text-sm mb-6">Area Premium. Masukkan password akses.</p>
+            <h2 class="text-2xl font-bold mb-2 tracking-tight">Hans Screaming Saham</h2>
+            <p class="text-slate-400 text-xs mb-6 uppercase tracking-wider font-medium">Institutional Terminal Access</p>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <input type="password" id="passwordInput" placeholder="Masukkan password..." 
                     class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
                 <div id="errorMsg" class="text-red-400 text-xs hidden">Password salah! Gunakan "hansskuy"</div>
-                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition shadow-lg shadow-blue-600/30">
-                    Buka Akses <i class="fa-solid fa-arrow-right ml-2"></i>
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition shadow-lg shadow-blue-600/30 text-sm">
+                    Inisialisasi Terminal <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </form>
         </div>
@@ -41,72 +41,175 @@
 
     <!-- MAIN APP -->
     <div id="mainApp" class="hidden flex-col min-h-screen">
-        <header class="bg-cardbg border-b border-slate-800 sticky top-0 z-30 shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <header class="bg-cardbg border-b border-borderdark sticky top-0 z-30 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
-                        <i class="fa-solid fa-chart-line text-white"></i>
+                    <div class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-chart-line text-white text-sm"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">PRO PROFESSIONAL</span>
+                        <h1 class="font-bold text-sm tracking-wide flex items-center gap-2">
+                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-widest">PRO TERMINAL</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Automated IDX Market Screener & Live Data</p>
+                        <p class="text-[11px] text-slate-400">Automated IDX Market Intelligence & Algorithmic Screener</p>
                     </div>
                 </div>
-                <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
-                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
-                </button>
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] text-emerald-400 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> SYSTEM ONLINE
+                    </div>
+                    <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                    </button>
+                </div>
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+        <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full space-y-6">
             
-            <!-- Ticker Tape -->
-            <div class="bg-cardbg border border-slate-800 rounded-2xl p-2 shadow-xl overflow-hidden">
+            <!-- Ticker Tape Otomatis -->
+            <div class="bg-cardbg border border-borderdark rounded-2xl p-2 shadow-xl overflow-hidden">
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                     {
-                    "symbols": [{"proName": "IDX:COMPOSITE", "title": "IHSG"}, {"proName": "IDX:BBCA", "title": "BBCA"}, {"proName": "IDX:BBRI", "title": "BBRI"}, {"proName": "IDX:ADRO", "title": "ADRO"}, {"proName": "IDX:JAWA", "title": "JAWA"}],
+                    "symbols": [
+                        {"proName": "IDX:COMPOSITE", "title": "IHSG"},
+                        {"proName": "IDX:BBCA", "title": "BBCA"},
+                        {"proName": "IDX:BBRI", "title": "BBRI"},
+                        {"proName": "IDX:ADRO", "title": "ADRO"},
+                        {"proName": "IDX:JAWA", "title": "JAWA"},
+                        {"proName": "IDX:GOTO", "title": "GOTO"},
+                        {"proName": "IDX:ASII", "title": "ASII"}
+                    ],
                     "showSymbolLogo": true, "isTransparent": true, "displayMode": "adaptive", "colorTheme": "dark", "locale": "id"
                     }
                     </script>
                 </div>
             </div>
 
-            <!-- Professional Header Info -->
-            <div class="bg-cardbg border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div>
-                    <h3 class="font-bold text-white text-base flex items-center gap-2">
-                        <i class="fa-solid fa-globe text-blue-500"></i> Market Screener Otomatis Seluruh Saham IDX
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-1">Data harga, volume, perubahan, dan indikator diperbarui otomatis secara real-time langsung dari server bursa.</p>
+            <!-- Tab Metode Otomatis -->
+            <div class="flex flex-wrap gap-2 border-b border-borderdark pb-4 items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="switchMode('screener', this)" class="mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-table-cells"></i> Market Screener Otomatis
+                    </button>
+                    <button onclick="switchMode('swing', this)" class="mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-area"></i> Swing Trade (Trend)
+                    </button>
+                    <button onclick="switchMode('scalping', this)" class="mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Scalping & Momentum
+                    </button>
+                    <button onclick="switchMode('chart', this)" class="mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-candlestick"></i> Live Advanced Chart
+                    </button>
                 </div>
-                <div class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-xl border border-slate-700 text-xs text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"><span></span></span> Live Connected to IDX
-                </div>
-            </div>
-
-            <!-- TradingView Market Screener Embed (Automated All Stocks) -->
-            <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden p-4">
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-                    {
-                        "width": "100%",
-                        "height": "550",
-                        "defaultColumn": "overview",
-                        "market": "indonesia",
-                        "showToolbar": true,
-                        "colorTheme": "dark",
-                        "locale": "id",
-                        "isTransparent": true
-                    }
-                    </script>
+                <div class="text-xs text-slate-400 font-mono hidden lg:block">
+                    Auto-Refresh Engine: <span class="text-emerald-400">Active</span>
                 </div>
             </div>
 
+            <!-- Container Konten Dinamis Otomatis -->
+            <div id="workspaceContainer" class="bg-cardbg border border-borderdark rounded-2xl shadow-xl overflow-hidden p-4 min-h-[550px]">
+                <!-- Default View: Screener Seluruh IDX -->
+                <div id="view-screener" class="space-y-4">
+                    <div class="flex justify-between items-center px-2">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-robot text-blue-500"></i> Algoritma Screener Otomatis Bursa Efek Indonesia
+                        </h3>
+                        <span class="text-xs text-slate-400 font-mono">Data real-time disinkronkan dari TradingView</span>
+                    </div>
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                        {
+                            "width": "100%",
+                            "height": "520",
+                            "defaultColumn": "overview",
+                            "market": "indonesia",
+                            "showToolbar": true,
+                            "colorTheme": "dark",
+                            "locale": "id",
+                            "isTransparent": true
+                        }
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Swing Trade View -->
+                <div id="view-swing" class="hidden space-y-4">
+                    <div class="flex justify-between items-center px-2">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chart-area text-blue-500"></i> Automated Trend & Swing Filter (Moving Average / MACD)
+                        </h3>
+                    </div>
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                        {
+                            "width": "100%",
+                            "height": "520",
+                            "defaultColumn": "performance",
+                            "market": "indonesia",
+                            "showToolbar": true,
+                            "colorTheme": "dark",
+                            "locale": "id",
+                            "isTransparent": true
+                        }
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Scalping View -->
+                <div id="view-scalping" class="hidden space-y-4">
+                    <div class="flex justify-between items-center px-2">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-amber-400"></i> Automated Momentum & Oscillator Screener (RSI / Volume Surge)
+                        </h3>
+                    </div>
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                        {
+                            "width": "100%",
+                            "height": "520",
+                            "defaultColumn": "oscillators",
+                            "market": "indonesia",
+                            "showToolbar": true,
+                            "colorTheme": "dark",
+                            "locale": "id",
+                            "isTransparent": true
+                        }
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Advanced Chart View -->
+                <div id="view-chart" class="hidden space-y-4">
+                    <div class="flex justify-between items-center px-2">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chart-candlestick text-emerald-400"></i> Interactive Advanced Chart Terminal (Ketik Kode Saham Bebas di Kiri Atas Chart)
+                        </h3>
+                    </div>
+                    <div class="tradingview-widget-container" style="height: 530px; width: 100%;">
+                        <div class="tradingview-widget-container__widget" style="height: 100%; width: 100%;"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                        {
+                            "autosize": true,
+                            "symbol": "IDX:JAWA",
+                            "interval": "D",
+                            "timezone": "Asia/Jakarta",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "id",
+                            "allow_symbol_change": true,
+                            "calendar": false,
+                            "support_host": "https://www.tradingview.com"
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -134,6 +237,23 @@
             document.getElementById('lockScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
+        }
+
+        function switchMode(mode, btn) {
+            // Sembunyikan semua view
+            document.getElementById('view-screener').classList.add('hidden');
+            document.getElementById('view-swing').classList.add('hidden');
+            document.getElementById('view-scalping').classList.add('hidden');
+            document.getElementById('view-chart').classList.add('hidden');
+
+            // Tampilkan view yang dipilih
+            document.getElementById(`view-${mode}`).classList.remove('hidden');
+
+            // Atur style tombol aktif
+            document.querySelectorAll('.mode-btn').forEach(b => {
+                b.className = "mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
+            });
+            btn.className = "mode-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
         }
     </script>
 </body>
