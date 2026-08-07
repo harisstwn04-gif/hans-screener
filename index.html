@@ -49,9 +49,9 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">MASTER PRO</span>
+                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">PRO PROFESSIONAL</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Advanced Market Screener & Universal Live Widget</p>
+                        <p class="text-xs text-slate-400">Automated IDX Market Screener & Live Data</p>
                     </div>
                 </div>
                 <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
@@ -75,81 +75,42 @@
                 </div>
             </div>
 
-            <!-- Search Bar Universal -->
-            <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
+            <!-- Professional Header Info -->
+            <div class="bg-cardbg border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div>
-                    <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Emiten Apapun (Auto Live Data)
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-globe text-blue-500"></i> Market Screener Otomatis Seluruh Saham IDX
                     </h3>
-                    <p class="text-xs text-slate-400">Ketik kode emitten (cth: PADA, GOTO) untuk cari atau langsung tambahkan ke metode pilihan.</p>
+                    <p class="text-xs text-slate-400 mt-1">Data harga, volume, perubahan, dan indikator diperbarui otomatis secara real-time langsung dari server bursa.</p>
                 </div>
-                <div class="w-full md:w-80 relative">
-                    <input type="text" id="globalSearchInput" onkeyup="handleGlobalSearch(event)" placeholder="Ketik kode saham (cth: PADA)..." 
-                        class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 uppercase">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-search"></i></span>
+                <div class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-xl border border-slate-700 text-xs text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"><span></span></span> Live Connected to IDX
                 </div>
             </div>
 
-            <!-- Tab Menu untuk Metode Trading -->
-            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4 items-center justify-between">
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2"><i class="fa-solid fa-chart-area"></i> Swing Trade</button>
-                    <button onclick="switchTab('daytrade')" id="btn-daytrade" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Day Trade</button>
-                    <button onclick="switchTab('scalping')" id="btn-scalping" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-stopwatch"></i> Scalping</button>
-                    <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-fire"></i> BPJS / BSJP</button>
+            <!-- TradingView Market Screener Embed (Automated All Stocks) -->
+            <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden p-4">
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                    {
+                        "width": "100%",
+                        "height": "550",
+                        "defaultColumn": "overview",
+                        "market": "indonesia",
+                        "showToolbar": true,
+                        "colorTheme": "dark",
+                        "locale": "id",
+                        "isTransparent": true
+                    }
+                    </script>
                 </div>
-                <button onclick="addNewCustomStockPrompt()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-plus"></i> Tambah Manual Emiten
-                </button>
             </div>
 
-            <!-- Table -->
-            <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-5 border-b border-slate-800">
-                    <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
-                    <p id="tableDesc" class="text-xs text-slate-400">Data live harga real-time & trading plan lengkap.</p>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase border-b border-slate-800">
-                                <th class="p-4">Saham</th>
-                                <th class="p-4">Harga Live & Perubahan</th>
-                                <th class="p-4">Metode / Indikator</th>
-                                <th class="p-4 text-blue-400">Area Entry</th>
-                                <th class="p-4 text-red-400">Stop Loss (SL)</th>
-                                <th class="p-4 text-emerald-400">Take Profit (TP)</th>
-                                <th class="p-4 text-center">Chart Full</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody" class="divide-y divide-slate-800/60 text-sm"></tbody>
-                    </table>
-                </div>
-            </div>
         </main>
     </div>
 
     <script>
-        const masterStockDatabase = {
-            swing: [
-                { code: "JAWA", name: "Jaya Agra Wattie Tbk", ind: "MACD Cross + Vol Spike", entry: "126 - 130", sl: "121", tp: "142" },
-                { code: "ADRO", name: "Adaro Energy Indonesia Tbk", ind: "MA20 Support + RSI Golden", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350" },
-                { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", ind: "Stochastic Oversold", entry: "4,380 - 4,430", sl: "4,290", tp: "4,650" }
-            ],
-            daytrade: [
-                { code: "BUMI", name: "Bumi Resources Tbk", ind: "Intraday Momentum Breakout", entry: "110 - 112", sl: "107", tp: "118" },
-                { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", ind: "Volume Surge 3x", entry: "70 - 72", sl: "68", tp: "78" }
-            ],
-            scalping: [
-                { code: "BRMS", name: "Bumi Resources Minerals", ind: "Orderbook Bid Thickening", entry: "380 - 386", sl: "372", tp: "402" }
-            ],
-            bpjs: [
-                { code: "ASII", name: "Astra International Tbk", ind: "Closing Strong Accumulation", entry: "5,120 - 5,160", sl: "5,050", tp: "5,325" }
-            ]
-        };
-
-        let currentActiveTab = 'swing';
-
         window.onload = function() {
             if (localStorage.getItem('hans_auth') === 'true') showApp();
         }
@@ -173,121 +134,6 @@
             document.getElementById('lockScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
-            loadTable(currentActiveTab);
-        }
-
-        function switchTab(tabKey) {
-            currentActiveTab = tabKey;
-            document.getElementById('globalSearchInput').value = '';
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2");
-            document.getElementById(`btn-${tabKey}`).className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
-            
-            const titles = { swing: "Rekomendasi Swing Trade", daytrade: "Rekomendasi Day Trade", scalping: "Rekomendasi Scalping", bpjs: "Rekomendasi BPJS / BSJP" };
-            document.getElementById('tableTitle').innerHTML = `<i class="fa-solid fa-chart-area text-blue-500"></i> ${titles[tabKey]}`;
-            loadTable(tabKey);
-        }
-
-        function loadTable(tabKey) {
-            renderRows(masterStockDatabase[tabKey], document.getElementById('tableBody'));
-        }
-
-        function handleGlobalSearch(e) {
-            let input = e.target.value.toUpperCase().trim();
-            let allStocks = [];
-            for (let cat in masterStockDatabase) {
-                masterStockDatabase[cat].forEach(s => { 
-                    if(!allStocks.some(e => e.code === s.code)) allStocks.push({...s, category: cat}); 
-                });
-            }
-
-            if (input === "") {
-                loadTable(currentActiveTab);
-                return;
-            }
-
-            let filtered = allStocks.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
-            
-            if (filtered.length === 0) {
-                // Jika emiten belum ada di database sama sekali, buatkan entri dinamis dengan plan default agar tidak kosong
-                filtered = [{
-                    code: input,
-                    name: `Emiten IDX (${input})`,
-                    ind: `Universal Search (${currentActiveTab.toUpperCase()})`,
-                    entry: "Cek Support Terdekat",
-                    sl: "Batas Risiko Mandiri",
-                    tp: "Target Profit Mandiri",
-                    isCustom: true
-                }];
-            }
-            renderRows(filtered, document.getElementById('tableBody'));
-        }
-
-        function addNewCustomStockPrompt() {
-            let code = prompt("Masukkan Kode Saham (Contoh: PADA, BBCA):");
-            if(!code) return;
-            code = code.toUpperCase().trim();
-            let entry = prompt("Masukkan Area Entry:", "Support Area");
-            let sl = prompt("Masukkan Stop Loss (SL):", "Cutloss Bawah");
-            let tp = prompt("Masukkan Take Profit (TP):", "Target Resistance");
-
-            masterStockDatabase[currentActiveTab].push({
-                code: code,
-                name: `Emiten IDX (${code})`,
-                ind: `Manual (${currentActiveTab.toUpperCase()})`,
-                entry: entry,
-                sl: sl,
-                tp: tp
-            });
-            loadTable(currentActiveTab);
-        }
-
-        function renderRows(dataArray, targetTbody) {
-            targetTbody.innerHTML = '';
-            dataArray.forEach((stock, index) => {
-                const row = document.createElement('tr');
-                const uniqueId = `tv-quote-${stock.code}-${index}-${Date.now()}`;
-                row.className = "hover:bg-slate-800/45 transition border-b border-slate-800/40 align-middle";
-                row.innerHTML = `
-                    <td class="p-4 font-bold text-white">
-                        ${stock.code}
-                        <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
-                    </td>
-                    <td class="p-4">
-                        <div class="tradingview-widget-container" style="width: 150px; height: 45px;">
-                            <div class="tradingview-widget-container__widget" id="${uniqueId}"></div>
-                        </div>
-                    </td>
-                    <td class="p-4 text-xs text-amber-300 font-medium"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> ${stock.ind}</td>
-                    <td class="p-4 font-bold text-blue-400 text-xs">${stock.entry}</td>
-                    <td class="p-4 font-semibold text-red-400 text-xs">${stock.sl}</td>
-                    <td class="p-4 font-semibold text-emerald-400 text-xs">${stock.tp}</td>
-                    <td class="p-4 text-center">
-                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition inline-flex items-center gap-1 shadow-md">
-                            <span>Chart</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </a>
-                    </td>
-                `;
-                targetTbody.appendChild(row);
-
-                setTimeout(() => {
-                    const container = document.getElementById(uniqueId);
-                    if (container) {
-                        container.innerHTML = '';
-                        const script = document.createElement('script');
-                        script.type = 'text/javascript';
-                        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
-                        script.async = true;
-                        script.innerHTML = JSON.stringify({
-                            "symbol": `IDX:${stock.code}`,
-                            "width": "150",
-                            "colorTheme": "dark",
-                            "isTransparent": true,
-                            "locale": "id"
-                        });
-                        container.appendChild(script);
-                    }
-                }, 100);
-            });
         }
     </script>
 </body>
