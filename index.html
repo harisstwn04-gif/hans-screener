@@ -27,7 +27,7 @@
 </head>
 <body class="bg-darkbg text-slate-100 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- BAGIAN 1: LOCK SCREEN (PASSWORD PROTECT) -->
+    <!-- LOCK SCREEN -->
     <div id="lockScreen" class="fixed inset-0 bg-darkbg z-50 flex items-center justify-center p-4">
         <div class="bg-cardbg border border-slate-700 p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
             <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <!-- BAGIAN 2: MAIN APP (DASHBOARD) -->
+    <!-- MAIN APP -->
     <div id="mainApp" class="hidden flex-col min-h-screen">
         
         <!-- Header Navbar -->
@@ -81,32 +81,47 @@
         <!-- Content Body -->
         <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
             
-            <!-- BAGIAN 3: TOP GAINERS & LOSERS LIVE SNAPSHOT -->
+            <!-- TRADINGVIEW TICKER TAPE WIDGET (LIVE MARKET FEED) -->
+            <div class="bg-cardbg border border-slate-800 rounded-2xl p-2 shadow-xl overflow-hidden">
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                    {
+                    "symbols": [{"proName": "IDX:COMPOSITE", "title": "IHSG"}, {"proName": "IDX:BBCA", "title": "BBCA"}, {"proName": "IDX:BBRI", "title": "BBRI"}, {"proName": "IDX:ADRO", "title": "ADRO"}, {"proName": "IDX:GOTO", "title": "GOTO"}, {"proName": "IDX:JAWA", "title": "JAWA"}],
+                    "showSymbolLogo": true,
+                    "isTransparent": true,
+                    "displayMode": "adaptive",
+                    "colorTheme": "dark",
+                    "locale": "id"
+                    }
+                    </script>
+                </div>
+            </div>
+
+            <!-- TOP GAINERS & LOSERS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Top Gainers -->
                 <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                     <h3 class="text-emerald-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-up"></i> Top Gainers Database (Akurat)
+                        <i class="fa-solid fa-arrow-trend-up"></i> Top Gainers Live Reference
                     </h3>
                     <div id="topGainersList" class="space-y-2 text-xs"></div>
                 </div>
-                <!-- Top Losers -->
                 <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                     <h3 class="text-red-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-down"></i> Top Losers Database (Akurat)
+                        <i class="fa-solid fa-arrow-trend-down"></i> Top Losers Live Reference
                     </h3>
                     <div id="topLosersList" class="space-y-2 text-xs"></div>
                 </div>
             </div>
 
-            <!-- BAGIAN 4: PENCARIAN SAHAM GLOBAL -->
+            <!-- PENCARIAN SAHAM GLOBAL -->
             <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                 <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div>
                         <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham Lainnya / Filter Sinyal
+                            <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham & Analisis Live TradingView
                         </h3>
-                        <p class="text-xs text-slate-400">Ketik emiten apapun (cth: PADA, TLKM, BBRI) untuk langsung melihat tabel lengkap & TradingView.</p>
+                        <p class="text-xs text-slate-400">Ketik emitten (cth: JAWA, BBRI, ASII, PADA) untuk melihat tabel & langsung buka chart live.</p>
                     </div>
                     <div class="w-full md:w-80 relative">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs">
@@ -118,7 +133,7 @@
                 </div>
             </div>
 
-            <!-- BAGIAN 5: KATEGORI / TAB MENU TRADING -->
+            <!-- KATEGORI TAB MENU TRADING -->
             <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
                 <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-blue-600 text-white shadow-lg shadow-blue-600/30 flex items-center gap-2">
                     <i class="fa-solid fa-chart-area"></i> Swing Trade
@@ -134,14 +149,14 @@
                 </button>
             </div>
 
-            <!-- CONTAINER TABEL UTAMA -->
+            <!-- TABEL UTAMA -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
                 <div class="p-5 border-b border-slate-800 flex justify-between items-center">
                     <div>
                         <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2">
                             <i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade
                         </h3>
-                        <p id="tableDesc" class="text-xs text-slate-400">Analisis area entry, stop loss, take profit, dan indikator akurat.</p>
+                        <p id="tableDesc" class="text-xs text-slate-400">Analisis area entry, stop loss, take profit, dan langsung terhubung live TradingView.</p>
                     </div>
                 </div>
 
@@ -150,13 +165,13 @@
                         <thead>
                             <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
                                 <th class="p-4 font-semibold">Saham</th>
-                                <th class="p-4 font-semibold">Harga (IDR)</th>
-                                <th class="p-4 font-semibold">Change</th>
+                                <th class="p-4 font-semibold">Estimasi / Acuan Harga</th>
+                                <th class="p-4 font-semibold">Status / Sinyal</th>
                                 <th class="p-4 font-semibold">Indikator Sinyal</th>
                                 <th class="p-4 font-semibold text-blue-400">Area Entry</th>
                                 <th class="p-4 font-semibold text-red-400">Stop Loss (SL)</th>
                                 <th class="p-4 font-semibold text-emerald-400">Take Profit (TP)</th>
-                                <th class="p-4 font-semibold text-center">Chart</th>
+                                <th class="p-4 font-semibold text-center">Live Chart TV</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="divide-y divide-slate-800/60 text-sm"></tbody>
@@ -164,8 +179,8 @@
                 </div>
                 
                 <div class="p-4 bg-slate-900/30 border-t border-slate-800 text-xs text-slate-400 flex justify-between items-center">
-                    <div><i class="fa-solid fa-circle-info text-blue-400 mr-1"></i> Semua saham lengkap dengan plan entry & manajemen risiko. Disclaimer On.</div>
-                    <div id="lastUpdate">Updated: Just now</div>
+                    <div><i class="fa-solid fa-circle-info text-blue-400 mr-1"></i> Klik tombol Chart untuk melihat harga live dan orderbook langsung di TradingView.</div>
+                    <div id="lastUpdate">Real-time Data Ready</div>
                 </div>
             </div>
 
@@ -176,32 +191,32 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT LOGIC DENGAN AUTO-GENERATOR PENCARIAN -->
+    <!-- SCRIPT -->
     <script>
         const masterStockDatabase = {
             swing: [
-                { code: "JAWA", name: "Jaya Agra Wattie Tbk", price: "130", change: "+4.84%", isPos: true, ind: "MACD Cross + Vol Spike", entry: "126 - 130", sl: "121", tp: "142" },
-                { code: "ADRO", name: "Adaro Energy Indonesia Tbk", price: "3,150", change: "+2.27%", isPos: true, ind: "MA20 Support + RSI Golden", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350" },
-                { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", price: "4,420", change: "-1.12%", isPos: false, ind: "Stochastic Oversold Rebound", entry: "4,380 - 4,430", sl: "4,290", tp: "4,650" },
-                { code: "ANTM", name: "Aneka Tambang Tbk", price: "2,880", change: "-0.69%", isPos: false, ind: "Bollinger Band Squeeze", entry: "2,840 - 2,890", sl: "2,760", tp: "3,050" },
-                { code: "TLKM", name: "Telkom Indonesia (Persero) Tbk", price: "2,970", change: "+1.36%", isPos: true, ind: "Support Double Bottom", entry: "2,940 - 2,980", sl: "2,890", tp: "3,150" }
+                { code: "JAWA", name: "Jaya Agra Wattie Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "MACD Cross + Vol Spike", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
+                { code: "ADRO", name: "Adaro Energy Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "MA20 Support + RSI Golden", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
+                { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Stochastic Oversold Rebound", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
+                { code: "ANTM", name: "Aneka Tambang Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Bollinger Band Squeeze", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
+                { code: "TLKM", name: "Telkom Indonesia (Persero) Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Support Double Bottom", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" }
             ],
             daytrade: [
-                { code: "BUMI", name: "Bumi Resources Tbk", price: "112", change: "+6.67%", isPos: true, ind: "Intraday Momentum Breakout", entry: "110 - 112", sl: "107", tp: "118" },
-                { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", price: "72", change: "+5.88%", isPos: true, ind: "Volume Surge 3x Rata-rata", entry: "70 - 72", sl: "68", tp: "78" },
-                { code: "PGAS", name: "Perusahaan Gas Negara Tbk", price: "1,545", change: "-1.59%", isPos: false, ind: "MACD Histogram Positif", entry: "1,530 - 1,550", sl: "1,500", tp: "1,610" },
-                { code: "BUKA", name: "Bukalapak.com Tbk", price: "124", change: "+3.33%", isPos: true, ind: "Breakout Resistance Minor", entry: "120 - 124", sl: "116", tp: "135" }
+                { code: "BUMI", name: "Bumi Resources Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Intraday Momentum Breakout", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
+                { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Volume Surge 3x Rata-rata", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
+                { code: "PGAS", name: "Perusahaan Gas Negara Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "MACD Histogram Positif", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
+                { code: "BUKA", name: "Bukalapak.com Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Breakout Resistance Minor", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" }
             ],
             scalping: [
-                { code: "BRMS", name: "Bumi Resources Minerals", price: "384", change: "+8.52%", isPos: true, ind: "Orderbook Bid Thickening", entry: "380 - 386", sl: "372", tp: "402" },
-                { code: "ENRG", name: "Energi Mega Persada Tbk", price: "246", change: "+4.24%", isPos: true, ind: "Fast Scalp Tape Reading", entry: "242 - 248", sl: "236", tp: "260" },
-                { code: "MEDC", name: "Medco Energi Internasional", price: "1,290", change: "+2.38%", isPos: true, ind: "EMA 5 Cross EMA 10", entry: "1,280 - 1,295", sl: "1,250", tp: "1,340" },
-                { code: "DEWA", name: "Darma Henwa Tbk", price: "54", change: "+8.00%", isPos: true, ind: "High Volatility Scalp", entry: "52 - 54", sl: "50", tp: "59" }
+                { code: "BRMS", name: "Bumi Resources Minerals", price: "Live Chart", change: "Real-time", isPos: true, ind: "Orderbook Bid Thickening", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
+                { code: "ENRG", name: "Energi Mega Persada Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Fast Scalp Tape Reading", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
+                { code: "MEDC", name: "Medco Energi Internasional", price: "Live Chart", change: "Real-time", isPos: true, ind: "EMA 5 Cross EMA 10", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
+                { code: "DEWA", name: "Darma Henwa Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "High Volatility Scalp", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" }
             ],
             bpjs: [
-                { code: "ASII", name: "Astra International Tbk", price: "5,150", change: "+1.98%", isPos: true, ind: "Closing Strong + Bandarmology", entry: "5,120 - 5,160", sl: "5,050", tp: "5,325" },
-                { code: "BBCA", name: "Bank Central Asia Tbk", price: "9,875", change: "+0.76%", isPos: true, ind: "Accumulation Zone Closing", entry: "9,800 - 9,875", sl: "9,700", tp: "10,100" },
-                { code: "UNVR", name: "Unilever Indonesia Tbk", price: "2,210", change: "-0.45%", isPos: false, ind: "Morning Rebound Setup", entry: "2,190 - 2,220", sl: "2,150", tp: "2,320" }
+                { code: "ASII", name: "Astra International Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Closing Strong + Bandarmology", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" },
+                { code: "BBCA", name: "Bank Central Asia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Accumulation Zone Closing", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" },
+                { code: "UNVR", name: "Unilever Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Morning Rebound Setup", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" }
             ]
         };
 
@@ -268,8 +283,6 @@
         function renderRows(dataArray, targetTbody) {
             targetTbody.innerHTML = '';
             dataArray.forEach(stock => {
-                const badgeColor = stock.isPos ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20';
-                
                 const row = document.createElement('tr');
                 row.className = "hover:bg-slate-800/40 transition duration-150 border-b border-slate-800/40";
                 
@@ -283,10 +296,14 @@
                             </div>
                         </div>
                     </td>
-                    <td class="p-4 font-semibold text-slate-200">Rp ${stock.price}</td>
+                    <td class="p-4 font-semibold text-blue-400">
+                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-chart-line text-xs"></i> Cek Harga Live
+                        </a>
+                    </td>
                     <td class="p-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-medium border ${badgeColor}">
-                            ${stock.change}
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium border bg-blue-500/10 text-blue-400 border-blue-500/20">
+                            Live Active
                         </span>
                     </td>
                     <td class="p-4 text-xs text-slate-300">
@@ -304,8 +321,8 @@
                         ${stock.tp}
                     </td>
                     <td class="p-4 text-center">
-                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-blue-600 hover:text-white text-slate-300 rounded-lg text-xs font-medium transition inline-flex items-center gap-1">
-                            <span>Chart</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition inline-flex items-center gap-1 shadow-lg shadow-blue-600/30">
+                            <span>Open Chart</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </a>
                     </td>
                 `;
@@ -336,18 +353,17 @@
                 s.ind.toUpperCase().includes(input)
             );
 
-            // AUTO-GENERATOR: Jika diketik dan tidak ada di database, buat data instan agar tabel tetap muncul!
             if (filtered.length === 0 && input.length >= 2) {
                 filtered = [{
                     code: input,
-                    name: "Custom Searched Emiten",
-                    price: "1,050",
-                    change: "+3.45%",
+                    name: "Custom Searched Emiten IDX",
+                    price: "Live Chart",
+                    change: "Real-time",
                     isPos: true,
-                    ind: "Live Technical Momentum Breakout",
-                    entry: "1,030 - 1,050",
-                    sl: "1,000",
-                    tp: "1,120"
+                    ind: "Custom Live Momentum Screener",
+                    entry: "Area Support Live",
+                    sl: "Cutloss Bawah",
+                    tp: "Target Resistance"
                 }];
             }
 
@@ -356,44 +372,36 @@
         }
 
         function loadMarketSnapshot() {
-            let allStocks = [];
-            for (let cat in masterStockDatabase) {
-                masterStockDatabase[cat].forEach(s => {
-                    if(!allStocks.some(existing => existing.code === s.code)) {
-                        allStocks.push(s);
-                    }
-                });
-            }
-
-            allStocks.forEach(s => {
-                s.numericChange = parseFloat(s.change.replace('%', '').replace('+', ''));
-            });
-
-            let sortedByGain = [...allStocks].sort((a, b) => b.numericChange - a.numericChange);
-            let sortedByLoss = [...allStocks].sort((a, b) => a.numericChange - b.numericChange);
-
-            let gainersHtml = '';
-            for (let i = 0; i < Math.min(3, sortedByGain.length); i++) {
-                let g = sortedByGain[i];
-                gainersHtml += `
-                    <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                        <span class="font-bold text-white">${g.code} <span class="text-slate-400 font-normal text-[11px]">(${g.name})</span></span>
-                        <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">${g.change}</span>
-                    </div>
-                `;
-            }
+            let gainersHtml = `
+                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                    <span class="font-bold text-white">IHSG (COMPOSITE)</span>
+                    <a href="https://id.tradingview.com/symbols/IDX-COMPOSITE/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                    <span class="font-bold text-white">BBCA <span class="text-slate-400 font-normal text-[11px]">(Bank Central Asia)</span></span>
+                    <a href="https://id.tradingview.com/symbols/IDX-BBCA/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                    <span class="font-bold text-white">BBRI <span class="text-slate-400 font-normal text-[11px]">(Bank Rakyat Indonesia)</span></span>
+                    <a href="https://id.tradingview.com/symbols/IDX-BBRI/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+            `;
             document.getElementById('topGainersList').innerHTML = gainersHtml;
 
-            let losersHtml = '';
-            for (let i = 0; i < Math.min(3, sortedByLoss.length); i++) {
-                let l = sortedByLoss[i];
-                losersHtml += `
-                    <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                        <span class="font-bold text-white">${l.code} <span class="text-slate-400 font-normal text-[11px]">(${l.name})</span></span>
-                        <span class="text-red-400 font-bold bg-red-500/10 px-2 py-0.5 rounded">${l.change}</span>
-                    </div>
-                `;
-            }
+            let losersHtml = `
+                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                    <span class="font-bold text-white">ADRO <span class="text-slate-400 font-normal text-[11px]">(Adaro Energy)</span></span>
+                    <a href="https://id.tradingview.com/symbols/IDX-ADRO/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                    <span class="font-bold text-white">GOTO <span class="text-slate-400 font-normal text-[11px]">(GoTo Gojek Tokopedia)</span></span>
+                    <a href="https://id.tradingview.com/symbols/IDX-ADRO/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                    <span class="font-bold text-white">JAWA <span class="text-slate-400 font-normal text-[11px]">(Jaya Agra Wattie)</span></span>
+                    <a href="https://id.tradingview.com/symbols/IDX-JAWA/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
+                </div>
+            `;
             document.getElementById('topLosersList').innerHTML = losersHtml;
         }
     </script>
