@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans Screaming Saham - AI Institutional Terminal</title>
+    <title>Hans Screaming Saham - Unlimited AI Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,16 +24,16 @@
     <div id="lockScreen" class="fixed inset-0 bg-darkbg z-50 flex items-center justify-center p-4">
         <div class="bg-cardbg border border-borderdark p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
             <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
-                <i class="fa-solid fa-brain"></i>
+                <i class="fa-solid fa-infinity"></i>
             </div>
             <h2 class="text-2xl font-bold mb-2 tracking-tight">Hans Screaming Saham</h2>
-            <p class="text-slate-400 text-xs mb-6 uppercase tracking-wider font-medium">AI Automated Terminal Access</p>
+            <p class="text-slate-400 text-xs mb-6 uppercase tracking-wider font-medium">Unlimited AI Terminal Access</p>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <input type="password" id="passwordInput" placeholder="Masukkan password..." 
                     class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
                 <div id="errorMsg" class="text-red-400 text-xs hidden">Password salah! Gunakan "hansskuy"</div>
                 <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition shadow-lg shadow-blue-600/30 text-sm">
-                    Inisialisasi AI Engine <i class="fa-solid fa-arrow-right ml-2"></i>
+                    Inisialisasi Unlimited Engine <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </form>
         </div>
@@ -45,18 +45,18 @@
             <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                        <i class="fa-solid fa-microchip text-white text-sm"></i>
+                        <i class="fa-solid fa-chart-line text-white text-sm"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-sm tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-indigo-500/20 text-indigo-400 text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-widest">AI QUANT PRO</span>
+                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-widest">UNLIMITED PRO</span>
                         </h1>
-                        <p class="text-[11px] text-slate-400">Automated AI Trading Plan, Entry, SL, TP & Multi-Strategy Screener</p>
+                        <p class="text-[11px] text-slate-400">Automated Live Market Screener & Multi-Strategy Intelligence</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="hidden md:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] text-indigo-400 font-mono">
-                        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span> AI SYNC ACTIVE
+                    <div class="hidden md:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] text-emerald-400 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ALL STOCKS UNLOCKED
                     </div>
                     <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-2">
                         <i class="fa-solid fa-right-from-bracket"></i> Keluar
@@ -88,84 +88,60 @@
                 </div>
             </div>
 
-            <!-- Tab Pemilihan Metode Otomatis (Tabel / AI Matrix) -->
+            <!-- Tab Pemilihan Metode Otomatis yang Presisi -->
             <div class="flex flex-wrap gap-2 border-b border-borderdark pb-4 items-center justify-between">
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="switchCategory('all', this)" class="cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group"></i> Semua Market (AI Live Matrix)
+                    <button onclick="switchMethod('overview', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Semua Market (Overview)
                     </button>
-                    <button onclick="switchCategory('swing', this)" class="cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-area"></i> Swing Trade
+                    <button onclick="switchMethod('performance', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-area"></i> Swing Trade (Trend & Perf)
                     </button>
-                    <button onclick="switchCategory('daytrade', this)" class="cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> Day Trade
+                    <button onclick="switchMethod('oscillators', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Day Trade & Scalping (Oscillators)
                     </button>
-                    <button onclick="switchCategory('scalping', this)" class="cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-stopwatch"></i> Scalping
-                    </button>
-                    <button onclick="switchCategory('bpjs', this)" class="cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-fire"></i> BPJS / BSJP
+                    <button onclick="switchMethod('trend', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-fire"></i> BPJS / BSJP (Trend Signal)
                     </button>
                 </div>
-                <div class="w-full md:w-72 relative mt-2 md:mt-0">
-                    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Cari emiten otomatis (cth: JAWA)..." 
-                        class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 uppercase font-mono">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-search"></i></span>
+                <div class="text-xs text-slate-400 font-mono hidden lg:block">
+                    Database: <span class="text-blue-400">100% Unlimited IDX</span>
                 </div>
             </div>
 
-            <!-- Tabel Utama Otomatis Terhubung AI -->
-            <div class="bg-cardbg border border-borderdark rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-4 border-b border-borderdark flex justify-between items-center">
+            <!-- Dynamic Screener Container (Otomatis Menyesuaikan Metode) -->
+            <div class="bg-cardbg border border-borderdark rounded-2xl shadow-xl overflow-hidden p-4">
+                <div class="flex justify-between items-center mb-4 px-2">
                     <div>
-                        <h3 id="tableTitle" class="font-bold text-sm text-white flex items-center gap-2">
-                            <i class="fa-solid fa-robot text-indigo-400"></i> AI Automated Multi-Strategy Matrix (IDX)
+                        <h3 id="screenerTitle" class="font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-robot text-blue-500"></i> Live Screener Seluruh Saham IDX - Overview Mode
                         </h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Area Entry, Stop Loss, dan Take Profit dihitung otomatis oleh AI berdasarkan pergerakan orderbook & price action live.</p>
-                    </div>
-                    <div class="text-[11px] font-mono text-indigo-300 bg-indigo-950/50 px-3 py-1 rounded-lg border border-indigo-900/50">
-                        Status: <span class="text-emerald-400 font-bold">AI Active Analysis</span>
+                        <p class="text-xs text-slate-400 mt-0.5">Memindai ribuan emiten bursa secara otomatis tanpa batas input manual.</p>
                     </div>
                 </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-900/80 text-slate-400 text-[11px] uppercase border-b border-borderdark font-mono tracking-wider">
-                                <th class="p-3.5">Emiten</th>
-                                <th class="p-3.5">Live Price</th>
-                                <th class="p-3.5">Metode / Strategi</th>
-                                <th class="p-3.5 text-blue-400">Area Entry (AI)</th>
-                                <th class="p-3.5 text-red-400">Stop Loss (SL)</th>
-                                <th class="p-3.5 text-emerald-400">Take Profit (TP)</th>
-                                <th class="p-3.5 text-center">Chart Full</th>
-                            </tr>
-                        </thead>
-                        <tbody id="aiTableBody" class="divide-y divide-slate-800/50 text-xs">
-                            <!-- Data akan di-generate otomatis via script -->
-                        </tbody>
-                    </table>
+
+                <!-- Screener Widget Wrapper -->
+                <div id="screenerWrapper" class="tradingview-widget-container min-h-[520px]">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script id="tv-screener-script" type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                    {
+                        "width": "100%",
+                        "height": "520",
+                        "defaultColumn": "overview",
+                        "market": "indonesia",
+                        "showToolbar": true,
+                        "colorTheme": "dark",
+                        "locale": "id",
+                        "isTransparent": true
+                    }
+                    </script>
                 </div>
             </div>
+
         </main>
     </div>
 
     <script>
-        // Database Otomatis Emiten Unggulan IDX dengan Parameter AI
-        const aiStocksDatabase = [
-            { code: "JAWA", name: "Jaya Agra Wattie Tbk", category: "swing", method: "Swing Trade", entry: "126 - 130", sl: "121", tp: "142", aiNote: "MACD Bullish Cross" },
-            { code: "ADRO", name: "Adaro Energy Indonesia Tbk", category: "swing", method: "Swing Trade", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350", aiNote: "MA20 Support Hold" },
-            { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", category: "swing", method: "Swing Trade", entry: "4,380 - 4,430", sl: "4,290", tp: "4,650", aiNote: "Stochastic Oversold" },
-            { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", category: "daytrade", method: "Day Trade", entry: "70 - 72", sl: "68", tp: "78", aiNote: "Intraday Volume Spike" },
-            { code: "BUMI", name: "Bumi Resources Tbk", category: "daytrade", method: "Day Trade", entry: "110 - 112", sl: "107", tp: "118", aiNote: "Breakout Resistance" },
-            { code: "BRMS", name: "Bumi Resources Minerals", category: "scalping", method: "Scalping", entry: "380 - 386", sl: "372", tp: "402", aiNote: "Orderbook Bid Thickening" },
-            { code: "ANTM", name: "Aneka Tambang Tbk", category: "scalping", method: "Scalping", entry: "1,520 - 1,540", sl: "1,500", tp: "1,590", aiNote: "Fast Momentum Scalp" },
-            { code: "ASII", name: "Astra International Tbk", category: "bpjs", method: "BPJS / BSJP", entry: "5,120 - 5,160", sl: "5,050", tp: "5,325", aiNote: "Closing Accumulation" },
-            { code: "BBCA", name: "Bank Central Asia Tbk", category: "bpjs", method: "BSJP", entry: "9,950 - 10,050", sl: "9,850", tp: "10,300", aiNote: "Stable Overnight Hold" }
-        ];
-
-        let activeCategory = 'all';
-
         window.onload = function() {
             if (localStorage.getItem('hans_auth') === 'true') showApp();
         }
@@ -189,99 +165,46 @@
             document.getElementById('lockScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
-            renderTable(aiStocksDatabase);
         }
 
-        function switchCategory(category, btn) {
-            activeCategory = category;
-            document.querySelectorAll('.cat-btn').forEach(b => {
-                b.className = "cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
+        function switchMethod(columnType, btn) {
+            // Ubah gaya tombol aktif
+            document.querySelectorAll('.method-btn').forEach(b => {
+                b.className = "method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
             });
-            btn.className = "cat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
-            
+            btn.className = "method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
+
+            // Atur Judul Deskripsi Berdasarkan Metode
             let titles = {
-                all: "AI Automated Multi-Strategy Matrix (IDX)",
-                swing: "AI Swing Trade Setup (Trend Following)",
-                daytrade: "AI Day Trade Setup (Intraday Momentum)",
-                scalping: "AI Scalping Setup (Fast Orderbook Execution)",
-                bpjs: "AI BPJS / BSJP Setup (Overnight Play)"
+                overview: { title: "Live Screener Seluruh Saham IDX - Overview Mode", desc: "Memindai seluruh emiten bursa secara otomatis untuk ringkasan harga dan volume." },
+                performance: { title: "Swing Trade Screener - Performance & Trend Matrix", desc: "Memfilter emiten berdasarkan performa tren mingguan/bulanan yang cocok untuk Swing Trade." },
+                oscillators: { title: "Day Trade & Scalping Screener - Momentum & Oscillators", desc: "Memfilter berdasarkan indikator cepat (RSI, Stochastic, CCI) untuk eksekusi Day Trade dan Scalping." },
+                trend: { title: "BPJS / BSJP Screener - Strong Trend & Buy Signals", desc: "Memindai sinyal beli kuat untuk strategi Beli Sore Jual Pagi (Overnight Action)." }
             };
-            document.getElementById('tableTitle').innerHTML = `<i class="fa-solid fa-robot text-indigo-400"></i> ${titles[category]}`;
-            
-            filterTable();
-        }
 
-        function filterTable() {
-            let keyword = document.getElementById('searchInput').value.toUpperCase().trim();
-            let filtered = aiStocksDatabase.filter(item => {
-                let matchCat = (activeCategory === 'all' || item.category === activeCategory);
-                let matchKeyword = (item.code.includes(keyword) || item.name.toUpperCase().includes(keyword));
-                return matchCat && matchKeyword;
+            document.getElementById('screenerTitle').innerHTML = `<i class="fa-solid fa-robot text-blue-500"></i> ${titles[columnType].title}`;
+
+            // Render ulang widget screener TradingView sesuai parameter kolom metode yang dipilih
+            const container = document.getElementById('screenerWrapper');
+            container.innerHTML = `
+                <div class="tradingview-widget-container__widget"></div>
+            `;
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-screener.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "width": "100%",
+                "height": "520",
+                "defaultColumn": columnType,
+                "market": "indonesia",
+                "showToolbar": true,
+                "colorTheme": "dark",
+                "locale": "id",
+                "isTransparent": true
             });
-            renderTable(filtered);
-        }
-
-        function renderTable(data) {
-            const tbody = document.getElementById('aiTableBody');
-            tbody.innerHTML = '';
-
-            if(data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400 font-mono">Tidak ada emiten yang cocok dengan filter AI.</td></tr>`;
-                return;
-            }
-
-            data.forEach((stock, index) => {
-                const tr = document.createElement('tr');
-                const widgetId = `tv-live-${stock.code}-${index}-${Date.now()}`;
-                tr.className = "hover:bg-slate-800/40 transition border-b border-slate-800/50 align-middle";
-                
-                tr.innerHTML = `
-                    <td class="p-3.5 font-bold text-white font-mono">
-                        ${stock.code}
-                        <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
-                    </td>
-                    <td class="p-3.5">
-                        <div class="tradingview-widget-container" style="width: 130px; height: 40px;">
-                            <div class="tradingview-widget-container__widget" id="${widgetId}"></div>
-                        </div>
-                    </td>
-                    <td class="p-3.5">
-                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-800 text-indigo-300 border border-slate-700">
-                            <i class="fa-solid fa-wand-magic-sparkles mr-1 text-[10px]"></i> ${stock.method}
-                        </span>
-                        <div class="text-[10px] text-slate-400 mt-1">AI: ${stock.aiNote}</div>
-                    </td>
-                    <td class="p-3.5 font-bold text-blue-400 font-mono">${stock.entry}</td>
-                    <td class="p-3.5 font-semibold text-red-400 font-mono">${stock.sl}</td>
-                    <td class="p-3.5 font-semibold text-emerald-400 font-mono">${stock.tp}</td>
-                    <td class="p-3.5 text-center">
-                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition inline-flex items-center gap-1 shadow-md">
-                            <span>Chart</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </a>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-
-                // Render widget harga live TradingView secara otomatis per baris
-                setTimeout(() => {
-                    const container = document.getElementById(widgetId);
-                    if (container) {
-                        container.innerHTML = '';
-                        const script = document.createElement('script');
-                        script.type = 'text/javascript';
-                        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
-                        script.async = true;
-                        script.innerHTML = JSON.stringify({
-                            "symbol": `IDX:${stock.code}`,
-                            "width": "130",
-                            "colorTheme": "dark",
-                            "isTransparent": true,
-                            "locale": "id"
-                        });
-                        container.appendChild(script);
-                    }
-                }, 80);
-            });
+            container.appendChild(script);
         }
     </script>
 </body>
