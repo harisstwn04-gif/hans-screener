@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans Screaming Saham - Unlimited AI Terminal</title>
+    <title>Hans Screaming Saham - Pro Screener</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,16 +24,16 @@
     <div id="lockScreen" class="fixed inset-0 bg-darkbg z-50 flex items-center justify-center p-4">
         <div class="bg-cardbg border border-borderdark p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
             <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
-                <i class="fa-solid fa-infinity"></i>
+                <i class="fa-solid fa-chart-line"></i>
             </div>
             <h2 class="text-2xl font-bold mb-2 tracking-tight">Hans Screaming Saham</h2>
-            <p class="text-slate-400 text-xs mb-6 uppercase tracking-wider font-medium">Unlimited AI Terminal Access</p>
+            <p class="text-slate-400 text-xs mb-6 uppercase tracking-wider font-medium">Institutional Screener Access</p>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <input type="password" id="passwordInput" placeholder="Masukkan password..." 
                     class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
                 <div id="errorMsg" class="text-red-400 text-xs hidden">Password salah! Gunakan "hansskuy"</div>
                 <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition shadow-lg shadow-blue-600/30 text-sm">
-                    Inisialisasi Unlimited Engine <i class="fa-solid fa-arrow-right ml-2"></i>
+                    Masuk Terminal <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </form>
         </div>
@@ -45,29 +45,24 @@
             <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                        <i class="fa-solid fa-chart-line text-white text-sm"></i>
+                        <i class="fa-solid fa-bolt text-white text-sm"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-sm tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-widest">UNLIMITED PRO</span>
+                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-widest">PRO TERMINAL</span>
                         </h1>
-                        <p class="text-[11px] text-slate-400">Automated Live Market Screener & Multi-Strategy Intelligence</p>
+                        <p class="text-[11px] text-slate-400">Automated Multi-Strategy Stock Screener (IDX)</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="hidden md:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] text-emerald-400 font-mono">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ALL STOCKS UNLOCKED
-                    </div>
-                    <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-2">
-                        <i class="fa-solid fa-right-from-bracket"></i> Keluar
-                    </button>
-                </div>
+                <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                </button>
             </div>
         </header>
 
         <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full space-y-6">
             
-            <!-- Ticker Tape Otomatis -->
+            <!-- Ticker Tape IHSG & Saham Pilihan -->
             <div class="bg-cardbg border border-borderdark rounded-2xl p-2 shadow-xl overflow-hidden">
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
@@ -77,10 +72,9 @@
                         {"proName": "IDX:COMPOSITE", "title": "IHSG"},
                         {"proName": "IDX:BBCA", "title": "BBCA"},
                         {"proName": "IDX:BBRI", "title": "BBRI"},
-                        {"proName": "IDX:ADRO", "title": "ADRO"},
                         {"proName": "IDX:JAWA", "title": "JAWA"},
-                        {"proName": "IDX:GOTO", "title": "GOTO"},
-                        {"proName": "IDX:ASII", "title": "ASII"}
+                        {"proName": "IDX:ADRO", "title": "ADRO"},
+                        {"proName": "IDX:GOTO", "title": "GOTO"}
                     ],
                     "showSymbolLogo": true, "isTransparent": true, "displayMode": "adaptive", "colorTheme": "dark", "locale": "id"
                     }
@@ -88,53 +82,38 @@
                 </div>
             </div>
 
-            <!-- Tab Pemilihan Metode Otomatis yang Presisi -->
+            <!-- Tombol Pilihan Gaya Trading (Sesuai Kebutuhan) -->
             <div class="flex flex-wrap gap-2 border-b border-borderdark pb-4 items-center justify-between">
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="switchMethod('overview', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2">
-                        <i class="fa-solid fa-globe"></i> Semua Market (Overview)
+                    <button onclick="changeScreener('overview', this)" class="strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i> Semua Market (Overview)
                     </button>
-                    <button onclick="switchMethod('performance', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-area"></i> Swing Trade (Trend & Perf)
+                    <button onclick="changeScreener('performance', this)" class="strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line"></i> Swing Trade
                     </button>
-                    <button onclick="switchMethod('oscillators', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> Day Trade & Scalping (Oscillators)
+                    <button onclick="changeScreener('oscillators', this)" class="strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Day Trade & Scalping
                     </button>
-                    <button onclick="switchMethod('trend', this)" class="method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-fire"></i> BPJS / BSJP (Trend Signal)
+                    <button onclick="changeScreener('trend', this)" class="strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-fire"></i> BPJS / BSJP
                     </button>
                 </div>
-                <div class="text-xs text-slate-400 font-mono hidden lg:block">
-                    Database: <span class="text-blue-400">100% Unlimited IDX</span>
+                <div class="text-xs text-slate-400 font-mono hidden md:block">
+                    Bursa: <span class="text-emerald-400 font-bold">IDX (Indonesia)</span>
                 </div>
             </div>
 
-            <!-- Dynamic Screener Container (Otomatis Menyesuaikan Metode) -->
-            <div class="bg-cardbg border border-borderdark rounded-2xl shadow-xl overflow-hidden p-4">
-                <div class="flex justify-between items-center mb-4 px-2">
-                    <div>
-                        <h3 id="screenerTitle" class="font-bold text-sm text-white flex items-center gap-2">
-                            <i class="fa-solid fa-robot text-blue-500"></i> Live Screener Seluruh Saham IDX - Overview Mode
-                        </h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Memindai ribuan emiten bursa secara otomatis tanpa batas input manual.</p>
-                    </div>
+            <!-- Kontainer Tabel Screener Utama -->
+            <div class="bg-cardbg border border-borderdark rounded-2xl shadow-xl p-4">
+                <div class="mb-4 px-2">
+                    <h3 id="screenerTitle" class="font-bold text-sm text-white flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-blue-500"></i> Market Overview Screener (Seluruh Emiten IDX)
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Tabel otomatis memperbarui data emiten secara real-time berdasarkan metode yang dipilih.</p>
                 </div>
 
-                <!-- Screener Widget Wrapper -->
-                <div id="screenerWrapper" class="tradingview-widget-container min-h-[520px]">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script id="tv-screener-script" type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-                    {
-                        "width": "100%",
-                        "height": "520",
-                        "defaultColumn": "overview",
-                        "market": "indonesia",
-                        "showToolbar": true,
-                        "colorTheme": "dark",
-                        "locale": "id",
-                        "isTransparent": true
-                    }
-                    </script>
+                <div id="screener-container" class="w-full">
+                    <!-- Widget Screener akan dimuat di sini secara dinamis -->
                 </div>
             </div>
 
@@ -143,7 +122,9 @@
 
     <script>
         window.onload = function() {
-            if (localStorage.getItem('hans_auth') === 'true') showApp();
+            if (localStorage.getItem('hans_auth') === 'true') {
+                showApp();
+            }
         }
 
         function handleLogin(e) {
@@ -165,30 +146,31 @@
             document.getElementById('lockScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
+            loadWidget('overview');
         }
 
-        function switchMethod(columnType, btn) {
-            // Ubah gaya tombol aktif
-            document.querySelectorAll('.method-btn').forEach(b => {
-                b.className = "method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
+        function changeScreener(columnType, btn) {
+            // Perbarui tombol aktif
+            document.querySelectorAll('.strat-btn').forEach(b => {
+                b.className = "strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
             });
-            btn.className = "method-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
+            btn.className = "strat-btn px-4 py-2 rounded-xl font-medium text-xs transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
 
-            // Atur Judul Deskripsi Berdasarkan Metode
-            let titles = {
-                overview: { title: "Live Screener Seluruh Saham IDX - Overview Mode", desc: "Memindai seluruh emiten bursa secara otomatis untuk ringkasan harga dan volume." },
-                performance: { title: "Swing Trade Screener - Performance & Trend Matrix", desc: "Memfilter emiten berdasarkan performa tren mingguan/bulanan yang cocok untuk Swing Trade." },
-                oscillators: { title: "Day Trade & Scalping Screener - Momentum & Oscillators", desc: "Memfilter berdasarkan indikator cepat (RSI, Stochastic, CCI) untuk eksekusi Day Trade dan Scalping." },
-                trend: { title: "BPJS / BSJP Screener - Strong Trend & Buy Signals", desc: "Memindai sinyal beli kuat untuk strategi Beli Sore Jual Pagi (Overnight Action)." }
+            // Ubah teks judul berdasarkan tombol
+            const titles = {
+                overview: "Market Overview Screener (Seluruh Emiten IDX)",
+                performance: "Swing Trade Screener (Berdasarkan Performa & Tren Harga)",
+                oscillators: "Day Trade & Scalping Screener (Berdasarkan Indikator Momentum / RSI / Stochastic)",
+                trend: "BPJS / BSJP Screener (Sinyal Tren Kuat Untuk Aksi Tutup Pasar)"
             };
+            document.getElementById('screenerTitle').innerHTML = `<i class="fa-solid fa-robot text-blue-500"></i> ${titles[columnType]}`;
 
-            document.getElementById('screenerTitle').innerHTML = `<i class="fa-solid fa-robot text-blue-500"></i> ${titles[columnType].title}`;
+            loadWidget(columnType);
+        }
 
-            // Render ulang widget screener TradingView sesuai parameter kolom metode yang dipilih
-            const container = document.getElementById('screenerWrapper');
-            container.innerHTML = `
-                <div class="tradingview-widget-container__widget"></div>
-            `;
+        function loadWidget(columnType) {
+            const container = document.getElementById('screener-container');
+            container.innerHTML = ''; // Bersihkan kontainer
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -196,7 +178,7 @@
             script.async = true;
             script.innerHTML = JSON.stringify({
                 "width": "100%",
-                "height": "520",
+                "height": "540",
                 "defaultColumn": columnType,
                 "market": "indonesia",
                 "showToolbar": true,
