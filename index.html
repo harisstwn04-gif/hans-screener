@@ -51,7 +51,7 @@
                         <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
                             Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">MASTER PRO</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Advanced Market Screener & Live TradingView Integration</p>
+                        <p class="text-xs text-slate-400">Advanced Market Screener & Unlimited IDX Integration</p>
                     </div>
                 </div>
                 <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
@@ -75,17 +75,17 @@
                 </div>
             </div>
 
-            <!-- Search -->
+            <!-- Search Bar Universal -->
             <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div>
                     <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Filter & Live Harga Saham IDX
+                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham Apapun (Global IDX Auto-Update)
                     </h3>
-                    <p class="text-xs text-slate-400">Ketik kode emitten (cth: JAWA, BBRI, PADA) untuk melihat plan & harga live-nya.</p>
+                    <p class="text-xs text-slate-400">Ketik kode emitten apa saja (contoh: PADA, GOTO, ASII, BUMI, dll) untuk langsung generate data live-nya.</p>
                 </div>
                 <div class="w-full md:w-80 relative">
-                    <input type="text" id="globalSearchInput" onkeyup="filterAllTables()" placeholder="Ketik kode saham..." 
-                        class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
+                    <input type="text" id="globalSearchInput" onkeyup="handleGlobalSearch(event)" placeholder="Ketik kode saham (cth: PADA)..." 
+                        class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 uppercase">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-search"></i></span>
                 </div>
             </div>
@@ -100,9 +100,11 @@
 
             <!-- Table -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-5 border-b border-slate-800">
-                    <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
-                    <p id="tableDesc" class="text-xs text-slate-400">Harga live akurat langsung dari bursa via TradingView.</p>
+                <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+                    <div>
+                        <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
+                        <p id="tableDesc" class="text-xs text-slate-400">Harga live otomatis dari database & pencarian universal.</p>
+                    </div>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -176,6 +178,9 @@
             document.getElementById('globalSearchInput').value = '';
             document.querySelectorAll('.tab-btn').forEach(btn => btn.className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2");
             document.getElementById(`btn-${tabKey}`).className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
+            
+            const titles = { swing: "Rekomendasi Swing Trade", daytrade: "Rekomendasi Day Trade", scalping: "Rekomendasi Scalping", bpjs: "Rekomendasi BPJS / BSJP" };
+            document.getElementById('tableTitle').innerHTML = `<i class="fa-solid fa-chart-area text-blue-500"></i> ${titles[tabKey]}`;
             loadTable(tabKey);
         }
 
@@ -183,11 +188,37 @@
             renderRows(masterStockDatabase[tabKey], document.getElementById('tableBody'));
         }
 
+        function handleGlobalSearch(e) {
+            let input = e.target.value.toUpperCase().trim();
+            let currentList = masterStockDatabase[currentActiveTab];
+
+            if (input === "") {
+                loadTable(currentActiveTab);
+                return;
+            }
+
+            // Filter dari list kategori aktif, atau buat secara dinamis universal jika tidak ditemukan
+            let filtered = currentList.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
+            
+            if (filtered.length === 0) {
+                // Auto generate emiten universal apa saja yang diketik user
+                filtered = [{
+                    code: input,
+                    name: `Emiten IDX (${input})`,
+                    ind: "Live Universal Screener",
+                    entry: "Cek Orderbook",
+                    sl: "Dynamic SL",
+                    tp: "Dynamic TP"
+                }];
+            }
+            renderRows(filtered, document.getElementById('tableBody'));
+        }
+
         function renderRows(dataArray, targetTbody) {
             targetTbody.innerHTML = '';
             dataArray.forEach((stock, index) => {
                 const row = document.createElement('tr');
-                const uniqueId = `tv-quote-${stock.code}-${index}`;
+                const uniqueId = `tv-quote-${stock.code}-${index}-${Date.now()}`;
                 row.className = "hover:bg-slate-800/45 transition border-b border-slate-800/40 align-middle";
                 row.innerHTML = `
                     <td class="p-4 font-bold text-white">
@@ -195,7 +226,6 @@
                         <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
                     </td>
                     <td class="p-4">
-                        <!-- TradingView Live Single Quote Widget -->
                         <div class="tradingview-widget-container" style="width: 140px; height: 35px;">
                             <div class="tradingview-widget-container__widget" id="${uniqueId}"></div>
                         </div>
@@ -212,7 +242,6 @@
                 `;
                 targetTbody.appendChild(row);
 
-                // Inject TradingView Widget Script dynamically for each row
                 setTimeout(() => {
                     const container = document.getElementById(uniqueId);
                     if (container && container.innerHTML === '') {
@@ -231,20 +260,6 @@
                     }
                 }, 50);
             });
-        }
-
-        function filterAllTables() {
-            let input = document.getElementById('globalSearchInput').value.toUpperCase().trim();
-            let allStocks = [];
-            for (let cat in masterStockDatabase) {
-                masterStockDatabase[cat].forEach(s => { if(!allStocks.some(e => e.code === s.code)) allStocks.push(s); });
-            }
-            if (input === "") { loadTable(currentActiveTab); return; }
-            let filtered = allStocks.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
-            if (filtered.length === 0 && input.length >= 2) {
-                filtered = [{ code: input, name: "Custom Emiten IDX", ind: "Live Momentum Screener", entry: "Area Support Live", sl: "Custom SL", tp: "Custom TP" }];
-            }
-            renderRows(filtered, document.getElementById('tableBody'));
         }
     </script>
 </body>
