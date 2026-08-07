@@ -81,7 +81,7 @@
                     <h3 class="font-bold text-white text-sm flex items-center gap-2">
                         <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Emiten Apapun (Auto Live Data)
                     </h3>
-                    <p class="text-xs text-slate-400">Ketik kode emitten apa saja (cth: PADA, GOTO, BBCA) untuk generate langsung.</p>
+                    <p class="text-xs text-slate-400">Ketik kode emitten (cth: PADA, GOTO) untuk cari atau langsung tambahkan ke metode pilihan.</p>
                 </div>
                 <div class="w-full md:w-80 relative">
                     <input type="text" id="globalSearchInput" onkeyup="handleGlobalSearch(event)" placeholder="Ketik kode saham (cth: PADA)..." 
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <!-- Tab Menu untuk Atur Gaya Trading -->
+            <!-- Tab Menu untuk Metode Trading -->
             <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4 items-center justify-between">
                 <div class="flex flex-wrap gap-2">
                     <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2"><i class="fa-solid fa-chart-area"></i> Swing Trade</button>
@@ -99,7 +99,7 @@
                     <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-fire"></i> BPJS / BSJP</button>
                 </div>
                 <button onclick="addNewCustomStockPrompt()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-plus"></i> Tambah Manual ke Kategori
+                    <i class="fa-solid fa-plus"></i> Tambah Manual Emiten
                 </button>
             </div>
 
@@ -107,7 +107,7 @@
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
                 <div class="p-5 border-b border-slate-800">
                     <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
-                    <p id="tableDesc" class="text-xs text-slate-400">Data live harga real-time dari TradingView untuk setiap emitten.</p>
+                    <p id="tableDesc" class="text-xs text-slate-400">Data live harga real-time & trading plan lengkap.</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -115,7 +115,7 @@
                             <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase border-b border-slate-800">
                                 <th class="p-4">Saham</th>
                                 <th class="p-4">Harga Live & Perubahan</th>
-                                <th class="p-4">Gaya / Indikator</th>
+                                <th class="p-4">Metode / Indikator</th>
                                 <th class="p-4 text-blue-400">Area Entry</th>
                                 <th class="p-4 text-red-400">Stop Loss (SL)</th>
                                 <th class="p-4 text-emerald-400">Take Profit (TP)</th>
@@ -193,24 +193,30 @@
 
         function handleGlobalSearch(e) {
             let input = e.target.value.toUpperCase().trim();
-            let currentList = masterStockDatabase[currentActiveTab];
+            let allStocks = [];
+            for (let cat in masterStockDatabase) {
+                masterStockDatabase[cat].forEach(s => { 
+                    if(!allStocks.some(e => e.code === s.code)) allStocks.push({...s, category: cat}); 
+                });
+            }
 
             if (input === "") {
                 loadTable(currentActiveTab);
                 return;
             }
 
-            let filtered = currentList.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
+            let filtered = allStocks.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
             
             if (filtered.length === 0) {
-                // Generate otomatis jika saham diketik bebas agar langsung keluar widget live & plan-nya
+                // Jika emiten belum ada di database sama sekali, buatkan entri dinamis dengan plan default agar tidak kosong
                 filtered = [{
                     code: input,
                     name: `Emiten IDX (${input})`,
-                    ind: `Live ${currentActiveTab.toUpperCase()} Screener`,
-                    entry: "Area Support Live",
-                    sl: "Set SL Mandiri",
-                    tp: "Set TP Mandiri"
+                    ind: `Universal Search (${currentActiveTab.toUpperCase()})`,
+                    entry: "Cek Support Terdekat",
+                    sl: "Batas Risiko Mandiri",
+                    tp: "Target Profit Mandiri",
+                    isCustom: true
                 }];
             }
             renderRows(filtered, document.getElementById('tableBody'));
@@ -220,14 +226,14 @@
             let code = prompt("Masukkan Kode Saham (Contoh: PADA, BBCA):");
             if(!code) return;
             code = code.toUpperCase().trim();
-            let entry = prompt("Masukkan Area Entry:", "Cek Support");
-            let sl = prompt("Masukkan Stop Loss (SL):", "Atur SL");
-            let tp = prompt("Masukkan Take Profit (TP):", "Atur TP");
+            let entry = prompt("Masukkan Area Entry:", "Support Area");
+            let sl = prompt("Masukkan Stop Loss (SL):", "Cutloss Bawah");
+            let tp = prompt("Masukkan Take Profit (TP):", "Target Resistance");
 
             masterStockDatabase[currentActiveTab].push({
                 code: code,
-                name: `Custom Emiten (${code})`,
-                ind: `Manual Input (${currentActiveTab.toUpperCase()})`,
+                name: `Emiten IDX (${code})`,
+                ind: `Manual (${currentActiveTab.toUpperCase()})`,
                 entry: entry,
                 sl: sl,
                 tp: tp
@@ -263,11 +269,10 @@
                 `;
                 targetTbody.appendChild(row);
 
-                // Render widget TradingView secara aman dengan jeda waktu render DOM
                 setTimeout(() => {
                     const container = document.getElementById(uniqueId);
                     if (container) {
-                        container.innerHTML = ''; // Bersihkan container sebelum diisi
+                        container.innerHTML = '';
                         const script = document.createElement('script');
                         script.type = 'text/javascript';
                         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
