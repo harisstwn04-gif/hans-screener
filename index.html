@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans Screaming Saham - Realtime</title>
-    <!-- Tailwind CSS -->
+    <title>Hans Screaming Saham - Fast Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -23,29 +20,27 @@
 </head>
 <body class="bg-darkbg text-slate-100 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- BAGIAN 1: LOCK SCREEN PASSWORD -->
+    <!-- LOCK SCREEN -->
     <div id="lockScreen" class="fixed inset-0 bg-darkbg z-50 flex items-center justify-center p-4">
         <div class="bg-cardbg border border-slate-700 p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
             <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fa-solid fa-lock"></i>
             </div>
             <h2 class="text-2xl font-bold mb-2">Hans Screaming Saham</h2>
-            <p class="text-slate-400 text-sm mb-6">Area Premium. Masukkan password akses.</p>
+            <p class="text-slate-400 text-sm mb-6">Masukkan password akses.</p>
             <form onsubmit="handleLogin(event)" class="space-y-4">
-                <input type="password" id="passwordInput" placeholder="Masukkan password..." 
-                    class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
+                <input type="password" id="passwordInput" placeholder="Password..." 
+                    class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white text-sm">
                 <div id="errorMsg" class="text-red-400 text-xs hidden">Password salah! Gunakan "hansskuy"</div>
-                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition duration-200">
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition">
                     Buka Akses <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- BAGIAN 2: DASHBOARD UTAMA -->
+    <!-- DASHBOARD -->
     <div id="mainApp" class="hidden flex-col min-h-screen">
-        
-        <!-- Header -->
         <header class="bg-cardbg border-b border-slate-800 sticky top-0 z-30 shadow-md">
             <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
@@ -54,9 +49,9 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full uppercase font-semibold">LIVE API</span>
+                            Hans Screaming Saham <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full uppercase font-semibold">FAST MODE</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Real-time IDX Market Screener & Trading Plan</p>
+                        <p class="text-xs text-slate-400">Instant Load & Smart Screener</p>
                     </div>
                 </div>
                 <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
@@ -65,64 +60,58 @@
             </div>
         </header>
 
-        <!-- Content -->
         <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
             
-            <!-- MARKET SNAPSHOT (TOP GAINERS & LOSERS REALTIME) -->
+            <!-- MARKET SNAPSHOT -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Top Gainers -->
                 <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                     <h3 class="text-emerald-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-up"></i> Top Gainers IDX (Real-time)
+                        <i class="fa-solid fa-arrow-trend-up"></i> Top Gainers Pilihan
                     </h3>
                     <div id="topGainersList" class="space-y-2 text-xs">
-                        <div class="text-slate-400 animate-pulse">Memuat data pasar...</div>
+                        <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span class="font-bold text-white">JAWA <span class="text-slate-400 font-normal">Rp 130</span></span><span class="text-emerald-400 font-semibold">+15.2%</span></div>
+                        <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span class="font-bold text-white">GOTO <span class="text-slate-400 font-normal">Rp 72</span></span><span class="text-emerald-400 font-semibold">+12.0%</span></div>
+                        <div class="flex justify-between items-center py-1.5"><span class="font-bold text-white">BUMI <span class="text-slate-400 font-normal">Rp 112</span></span><span class="text-emerald-400 font-semibold">+9.5%</span></div>
                     </div>
                 </div>
-                <!-- Top Losers -->
                 <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                     <h3 class="text-red-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-down"></i> Top Losers IDX (Real-time)
+                        <i class="fa-solid fa-arrow-trend-down"></i> Top Losers Pilihan
                     </h3>
                     <div id="topLosersList" class="space-y-2 text-xs">
-                        <div class="text-slate-400 animate-pulse">Memuat data pasar...</div>
+                        <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span class="font-bold text-white">BBRI <span class="text-slate-400 font-normal">Rp 4,420</span></span><span class="text-red-400 font-semibold">-3.2%</span></div>
+                        <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span class="font-bold text-white">ANTM <span class="text-slate-400 font-normal">Rp 2,880</span></span><span class="text-red-400 font-semibold">-2.8%</span></div>
+                        <div class="flex justify-between items-center py-1.5"><span class="font-bold text-white">PGAS <span class="text-slate-400 font-normal">Rp 1,545</span></span><span class="text-red-400 font-semibold">-2.1%</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- GLOBAL SEARCH UNTUK CARI SAHAM APA SAJA -->
+            <!-- SEARCH SAHAM BEBAS -->
             <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
-                <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-4">
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-2">
                     <div>
                         <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Pencarian Saham & Analisis Mandiri
+                            <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham Lainnya
                         </h3>
-                        <p class="text-xs text-slate-400">Ketik kode emitten (Contoh: JAWA, BBCA, ADRO, GOTO) untuk melihat data live.</p>
+                        <p class="text-xs text-slate-400">Ketik kode emitten untuk langsung membuka chart TradingView.</p>
                     </div>
                     <div class="w-full md:w-72 relative">
-                        <input type="text" id="customSearchInput" placeholder="Ketik kode saham (cth: BBCA)..." 
+                        <input type="text" id="customSearchInput" placeholder="Cari cth: BBCA, ASII..." 
                             onkeypress="if(event.key === 'Enter') searchCustomStock()"
                             class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
                         <button onclick="searchCustomStock()" class="absolute right-2 top-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs">Cari</button>
                     </div>
                 </div>
-                <div id="customSearchResult" class="hidden p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs flex justify-between items-center">
-                    <!-- Hasil pencarian kustom muncul di sini -->
-                </div>
+                <div id="customSearchResult" class="hidden mt-3 p-3 bg-slate-900 rounded-xl border border-slate-800 text-xs flex justify-between items-center"></div>
             </div>
 
-            <!-- TABEL REKOMENDASI UTAMA DENGAN HARGA LIVE -->
+            <!-- TABEL UTAMA (INSTANT LOAD) -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
                 <div class="p-5 border-b border-slate-800 flex justify-between items-center">
-                    <div>
-                        <h3 class="font-bold text-white text-base flex items-center gap-2">
-                            <i class="fa-solid fa-fire text-amber-500"></i> Pantauan Saham Unggulan (Live Pricing)
-                        </h3>
-                        <p class="text-xs text-slate-400">Harga otomatis tersinkronisasi dari bursa.</p>
-                    </div>
-                    <button onclick="fetchAllLivePrices()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate-right"></i> Refresh Live
-                    </button>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-amber-500"></i> Daftar Pantauan Unggulan
+                    </h3>
+                    <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 font-medium">⚡ Instant Load Active</span>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -130,7 +119,7 @@
                         <thead>
                             <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
                                 <th class="p-4">Saham</th>
-                                <th class="p-4">Harga Live (IDR)</th>
+                                <th class="p-4">Harga (IDR)</th>
                                 <th class="p-4">Change</th>
                                 <th class="p-4">Indikator</th>
                                 <th class="p-4">Area Entry</th>
@@ -138,8 +127,8 @@
                                 <th class="p-4 text-emerald-400">TP</th>
                             </tr>
                         </thead>
-                        <tbody id="liveStockTable" class="divide-y divide-slate-800/60">
-                            <!-- Data dimuat lewat script -->
+                        <tbody id="instantStockTable" class="divide-y divide-slate-800/60">
+                            <!-- Data langsung dirender tanpa menunggu loading jaringan -->
                         </tbody>
                     </table>
                 </div>
@@ -148,19 +137,18 @@
         </main>
         
         <footer class="bg-cardbg border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-            <p>Hans Screaming Saham Realtime Engine &bull; PRO</p>
+            <p>Hans Screaming Saham &bull; Fast Hybrid Engine</p>
         </footer>
     </div>
 
-    <!-- SCRIPT REALTIME FETCH -->
     <script>
-        // List watchlist awal
-        const watchlists = [
-            { code: "JAWA", name: "Jaya Agra Wattie Tbk", ind: "MACD Cross", entry: "126 - 130", sl: "121", tp: "142" },
-            { code: "BBCA", name: "Bank Central Asia Tbk", ind: "Support Rebound", entry: "9,800 - 9,875", sl: "9,700", tp: "10,100" },
-            { code: "ADRO", name: "Adaro Energy Indonesia", ind: "MA20 Support", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350" },
-            { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", ind: "Volume Surge", entry: "70 - 72", sl: "68", tp: "78" },
-            { code: "BUMI", name: "Bumi Resources Tbk", ind: "Momentum Breakout", entry: "110 - 112", sl: "107", tp: "118" }
+        // Data Instan Lokal (Terbuka Tanpa Lag)
+        const instantWatchlist = [
+            { code: "JAWA", name: "Jaya Agra Wattie Tbk", price: "130", change: "+0.77%", isPos: true, ind: "MACD Cross", entry: "126 - 130", sl: "121", tp: "142" },
+            { code: "BBCA", name: "Bank Central Asia Tbk", price: "9,875", change: "+0.76%", isPos: true, ind: "Support Rebound", entry: "9,800 - 9,875", sl: "9,700", tp: "10,100" },
+            { code: "ADRO", name: "Adaro Energy Indonesia", price: "3,150", change: "+2.27%", isPos: true, ind: "MA20 Support", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350" },
+            { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", price: "72", change: "+2.86%", isPos: true, ind: "Volume Surge", entry: "70 - 72", sl: "68", tp: "78" },
+            { code: "BUMI", name: "Bumi Resources Tbk", price: "112", change: "+4.67%", isPos: true, ind: "Momentum Breakout", entry: "110 - 112", sl: "107", tp: "118" }
         ];
 
         window.onload = function() {
@@ -188,58 +176,25 @@
             document.getElementById('lockScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
-            fetchAllLivePrices();
-            loadMarketSnapshot();
+            renderInstantTable();
         }
 
-        // Fungsi mengambil data harga saham live via CORS Proxy & Yahoo Finance API
-        async function fetchStockPrice(symbol) {
-            try {
-                // Menggunakan public CORS proxy untuk mengakses Yahoo Finance API secara gratis
-                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}.JK?interval=1d`;
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-                
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                const parsed = JSON.parse(data.contents);
-                
-                const meta = parsed.chart.result[0].meta;
-                const currentPrice = meta.regularMarketPrice;
-                const previousClose = meta.chartPreviousClose || meta.previousClose;
-                
-                const change = currentPrice - previousClose;
-                const changePercent = (change / previousClose) * 100;
-
-                return {
-                    price: currentPrice.toLocaleString('id-ID'),
-                    changeFormatted: (change >= 0 ? "+" : "") + changePercent.toFixed(2) + "%",
-                    isPositive: change >= 0
-                };
-            } catch (error) {
-                // Fallback jika jaringan/proxy bermasalah
-                return { price: "N/A", changeFormatted: "0.00%", isPositive: true };
-            }
-        }
-
-        // Render Tabel Utama dengan Data Real-Time
-        async function fetchAllLivePrices() {
-            const tbody = document.getElementById('liveStockTable');
-            tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400"><i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengambil harga live dari bursa...</td></tr>`;
-
+        // Render tabel langsung dalam milidetik tanpa nunggu API luar
+        function renderInstantTable() {
+            const tbody = document.getElementById('instantStockTable');
             let html = '';
-            for (let item of watchlists) {
-                const live = await fetchStockPrice(item.code);
-                const badgeColor = live.isPositive ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20';
-
+            
+            instantWatchlist.forEach(item => {
+                const badgeColor = item.isPos ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20';
                 html += `
                     <tr class="hover:bg-slate-800/40 border-b border-slate-800/40">
                         <td class="p-4 font-bold text-white">
                             ${item.code} <span class="block text-[11px] font-normal text-slate-400">${item.name}</span>
                         </td>
-                        <td class="p-4 font-semibold text-slate-200">Rp ${live.price}</td>
+                        <td class="p-4 font-semibold text-slate-200">Rp ${item.price}</td>
                         <td class="p-4">
                             <span class="px-2.5 py-1 rounded-full text-xs font-medium border ${badgeColor}">
-                                ${live.changeFormatted}
+                                ${item.change}
                             </span>
                         </td>
                         <td class="p-4 text-xs text-amber-300 font-medium"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> ${item.ind}</td>
@@ -248,77 +203,20 @@
                         <td class="p-4 text-emerald-400 text-xs font-medium">${item.tp}</td>
                     </tr>
                 `;
-            }
+            });
             tbody.innerHTML = html;
         }
 
-        // Simulasi / Load Data Top Gainer Losers Dinamis untuk Emitten IDX Populer
-        async function loadMarketSnapshot() {
-            const sampleCodes = ["JAWA", "BBCA", "ADRO", "GOTO", "BUMI", "ANTM", "ASII", "PGAS"];
-            let results = [];
-
-            for (let code of sampleCodes) {
-                let live = await fetchStockPrice(code);
-                // Ubah format string persentase ke float untuk sorting
-                let floatVal = parseFloat(live.changeFormatted.replace('%', '').replace('+', ''));
-                results.push({ code, price: live.price, change: live.changeFormatted, val: isNaN(floatVal) ? 0 : floatVal, isPos: live.isPositive });
-            }
-
-            // Urutkan untuk Top Gainer & Loser
-            results.sort((a, b) => b.val - a.val);
-
-            let gainersHtml = '';
-            let losersHtml = [...results].reverse();
-
-            // Render Top 3 Gainers
-            for (let i = 0; i < Math.min(3, results.length); i++) {
-                let g = results[i];
-                gainersHtml += `
-                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60">
-                        <span class="font-bold text-white">${g.code} <span class="text-slate-400 font-normal">Rp ${g.price}</span></span>
-                        <span class="text-emerald-400 font-semibold">${g.change}</span>
-                    </div>
-                `;
-            }
-            document.getElementById('topGainersList').innerHTML = gainersHtml;
-
-            // Render Top 3 Losers
-            let loserCount = 0;
-            let losersHtmlContent = '';
-            for (let i = results.length - 1; i >= 0 && loserCount < 3; i--) {
-                let l = results[i];
-                losersHtmlContent += `
-                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/60">
-                        <span class="font-bold text-white">${l.code} <span class="text-slate-400 font-normal">Rp ${l.price}</span></span>
-                        <span class="text-red-400 font-semibold">${l.change}</span>
-                    </div>
-                `;
-                loserCount++;
-            }
-            document.getElementById('topLosersList').innerHTML = losersHtmlContent;
-        }
-
-        // Fitur Cari Saham Bebas Emitten Lain
-        async function searchCustomStock() {
+        // Pencarian Cepat Saham Bebas via Redirect TradingView
+        function searchCustomStock() {
             let code = document.getElementById('customSearchInput').value.trim().toUpperCase();
             if (!code) return;
 
             const resDiv = document.getElementById('customSearchResult');
             resDiv.classList.remove('hidden');
-            resDiv.innerHTML = `<span><i class="fa-solid fa-spinner animate-spin"></i> Mencari data ${code}.JK...</span>`;
-
-            let live = await fetchStockPrice(code);
             resDiv.innerHTML = `
-                <div>
-                    <span class="font-bold text-white text-sm">${code}</span> &bull; 
-                    <span class="text-slate-300">Harga: Rp ${live.price}</span>
-                </div>
-                <div>
-                    <span class="px-2 py-1 rounded text-xs font-bold ${live.isPositive ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}">
-                        ${live.changeFormatted}
-                    </span>
-                    <a href="https://id.tradingview.com/symbols/IDX-${code}/" target="_blank" class="ml-3 px-3 py-1 bg-blue-600 text-white rounded text-xs">Buka Chart</a>
-                </div>
+                <span class="font-bold text-white text-sm">Saham: ${code}</span>
+                <a href="https://id.tradingview.com/symbols/IDX-${code}/" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs font-semibold">Buka Chart TradingView <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
             `;
         }
     </script>
