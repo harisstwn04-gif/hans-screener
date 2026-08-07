@@ -4,22 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hans Screaming Saham - Pro Screener</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        darkbg: '#0f172a',
-                        cardbg: '#1e293b',
-                        accent: '#3b82f6',
-                    }
+                    colors: { darkbg: '#0f172a', cardbg: '#1e293b', accent: '#3b82f6' }
                 }
             }
         }
@@ -34,204 +27,130 @@
                 <i class="fa-solid fa-lock"></i>
             </div>
             <h2 class="text-2xl font-bold mb-2">Hans Screaming Saham</h2>
-            <p class="text-slate-400 text-sm mb-6">Area Premium. Masukkan password akses untuk melanjutkan.</p>
-            
+            <p class="text-slate-400 text-sm mb-6">Area Premium. Masukkan password akses.</p>
             <form onsubmit="handleLogin(event)" class="space-y-4">
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                        <i class="fa-solid fa-key"></i>
-                    </span>
-                    <input type="password" id="passwordInput" placeholder="Masukkan password..." 
-                        class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
-                </div>
+                <input type="password" id="passwordInput" placeholder="Masukkan password..." 
+                    class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-slate-500 text-sm">
                 <div id="errorMsg" class="text-red-400 text-xs hidden">Password salah! Gunakan "hansskuy"</div>
-                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-blue-600/30">
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition shadow-lg shadow-blue-600/30">
                     Buka Akses <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </form>
-            <div class="mt-6 text-xs text-slate-500">Protected by Hans Security System &copy; 2026</div>
         </div>
     </div>
 
     <!-- MAIN APP -->
     <div id="mainApp" class="hidden flex-col min-h-screen">
-        
-        <!-- Header Navbar -->
         <header class="bg-cardbg border-b border-slate-800 sticky top-0 z-30 shadow-md">
             <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
                         <i class="fa-solid fa-chart-line text-white"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
-                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">MASTER PRO</span>
+                            Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">MASTER PRO</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Advanced Market Screener & Complete Trading Plans</p>
+                        <p class="text-xs text-slate-400">Advanced Market Screener & Live TradingView Integration</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 hover:border-red-500/50 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition duration-200 flex items-center gap-2">
-                        <i class="fa-solid fa-right-from-bracket"></i> Keluar
-                    </button>
-                </div>
+                <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                </button>
             </div>
         </header>
 
-        <!-- Content Body -->
         <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
             
-            <!-- TRADINGVIEW TICKER TAPE WIDGET (LIVE MARKET FEED) -->
+            <!-- Ticker Tape -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl p-2 shadow-xl overflow-hidden">
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                     {
-                    "symbols": [{"proName": "IDX:COMPOSITE", "title": "IHSG"}, {"proName": "IDX:BBCA", "title": "BBCA"}, {"proName": "IDX:BBRI", "title": "BBRI"}, {"proName": "IDX:ADRO", "title": "ADRO"}, {"proName": "IDX:GOTO", "title": "GOTO"}, {"proName": "IDX:JAWA", "title": "JAWA"}],
-                    "showSymbolLogo": true,
-                    "isTransparent": true,
-                    "displayMode": "adaptive",
-                    "colorTheme": "dark",
-                    "locale": "id"
+                    "symbols": [{"proName": "IDX:COMPOSITE", "title": "IHSG"}, {"proName": "IDX:BBCA", "title": "BBCA"}, {"proName": "IDX:BBRI", "title": "BBRI"}, {"proName": "IDX:ADRO", "title": "ADRO"}, {"proName": "IDX:JAWA", "title": "JAWA"}],
+                    "showSymbolLogo": true, "isTransparent": true, "displayMode": "adaptive", "colorTheme": "dark", "locale": "id"
                     }
                     </script>
                 </div>
             </div>
 
-            <!-- TOP GAINERS & LOSERS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
-                    <h3 class="text-emerald-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-up"></i> Top Gainers Live Reference
+            <!-- Search -->
+            <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-white text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Filter & Live Chart Saham IDX
                     </h3>
-                    <div id="topGainersList" class="space-y-2 text-xs"></div>
+                    <p class="text-xs text-slate-400">Ketik kode emitten (cth: JAWA, BBRI, PADA) untuk melihat plan & chart live-nya.</p>
                 </div>
-                <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
-                    <h3 class="text-red-400 font-bold mb-3 flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-trend-down"></i> Top Losers Live Reference
-                    </h3>
-                    <div id="topLosersList" class="space-y-2 text-xs"></div>
+                <div class="w-full md:w-80 relative">
+                    <input type="text" id="globalSearchInput" onkeyup="filterAllTables()" placeholder="Ketik kode saham..." 
+                        class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-search"></i></span>
                 </div>
             </div>
 
-            <!-- PENCARIAN SAHAM GLOBAL -->
-            <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
-                <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
-                    <div>
-                        <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham & Analisis Live TradingView
-                        </h3>
-                        <p class="text-xs text-slate-400">Ketik emitten (cth: JAWA, BBRI, ASII, PADA) untuk melihat tabel & langsung buka chart live.</p>
-                    </div>
-                    <div class="w-full md:w-80 relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs">
-                            <i class="fa-solid fa-search"></i>
-                        </span>
-                        <input type="text" id="globalSearchInput" onkeyup="filterAllTables()" placeholder="Ketik kode saham..." 
-                            class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- KATEGORI TAB MENU TRADING -->
+            <!-- Tab Menu -->
             <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
-                <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-blue-600 text-white shadow-lg shadow-blue-600/30 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-area"></i> Swing Trade
-                </button>
-                <button onclick="switchTab('daytrade')" id="btn-daytrade" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> Day Trade
-                </button>
-                <button onclick="switchTab('scalping')" id="btn-scalping" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-stopwatch"></i> Scalping
-                </button>
-                <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-fire"></i> BPJS / BSJP
-                </button>
+                <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2"><i class="fa-solid fa-chart-area"></i> Swing Trade</button>
+                <button onclick="switchTab('daytrade')" id="btn-daytrade" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Day Trade</button>
+                <button onclick="switchTab('scalping')" id="btn-scalping" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-stopwatch"></i> Scalping</button>
+                <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-fire"></i> BPJS / BSJP</button>
             </div>
 
-            <!-- TABEL UTAMA -->
+            <!-- Table -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-5 border-b border-slate-800 flex justify-between items-center">
-                    <div>
-                        <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2">
-                            <i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade
-                        </h3>
-                        <p id="tableDesc" class="text-xs text-slate-400">Analisis area entry, stop loss, take profit, dan langsung terhubung live TradingView.</p>
-                    </div>
+                <div class="p-5 border-b border-slate-800">
+                    <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
+                    <p id="tableDesc" class="text-xs text-slate-400">Trading plan lengkap dengan embed live chart TradingView.</p>
                 </div>
-
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse" id="stockTable">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
-                                <th class="p-4 font-semibold">Saham</th>
-                                <th class="p-4 font-semibold">Estimasi / Acuan Harga</th>
-                                <th class="p-4 font-semibold">Status / Sinyal</th>
-                                <th class="p-4 font-semibold">Indikator Sinyal</th>
-                                <th class="p-4 font-semibold text-blue-400">Area Entry</th>
-                                <th class="p-4 font-semibold text-red-400">Stop Loss (SL)</th>
-                                <th class="p-4 font-semibold text-emerald-400">Take Profit (TP)</th>
-                                <th class="p-4 font-semibold text-center">Live Chart TV</th>
+                            <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase border-b border-slate-800">
+                                <th class="p-4">Saham</th>
+                                <th class="p-4">Indikator Sinyal</th>
+                                <th class="p-4 text-blue-400">Area Entry</th>
+                                <th class="p-4 text-red-400">Stop Loss (SL)</th>
+                                <th class="p-4 text-emerald-400">Take Profit (TP)</th>
+                                <th class="p-4 text-center">Live Chart TradingView</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="divide-y divide-slate-800/60 text-sm"></tbody>
                     </table>
                 </div>
-                
-                <div class="p-4 bg-slate-900/30 border-t border-slate-800 text-xs text-slate-400 flex justify-between items-center">
-                    <div><i class="fa-solid fa-circle-info text-blue-400 mr-1"></i> Klik tombol Chart untuk melihat harga live dan orderbook langsung di TradingView.</div>
-                    <div id="lastUpdate">Real-time Data Ready</div>
-                </div>
             </div>
-
         </main>
-
-        <footer class="bg-cardbg border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-            <p>Hans Screaming Saham Platform &bull; Professional Edition</p>
-        </footer>
     </div>
 
-    <!-- SCRIPT -->
     <script>
         const masterStockDatabase = {
             swing: [
-                { code: "JAWA", name: "Jaya Agra Wattie Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "MACD Cross + Vol Spike", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
-                { code: "ADRO", name: "Adaro Energy Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "MA20 Support + RSI Golden", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
-                { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Stochastic Oversold Rebound", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
-                { code: "ANTM", name: "Aneka Tambang Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Bollinger Band Squeeze", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" },
-                { code: "TLKM", name: "Telkom Indonesia (Persero) Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Support Double Bottom", entry: "Area Support", sl: "Cutloss Bawah", tp: "Target Resistance" }
+                { code: "JAWA", name: "Jaya Agra Wattie Tbk", ind: "MACD Cross + Vol Spike", entry: "126 - 130", sl: "121", tp: "142" },
+                { code: "ADRO", name: "Adaro Energy Indonesia Tbk", ind: "MA20 Support + RSI Golden", entry: "3,100 - 3,150", sl: "3,020", tp: "3,350" },
+                { code: "BBRI", name: "Bank Rakyat Indonesia Tbk", ind: "Stochastic Oversold", entry: "4,380 - 4,430", sl: "4,290", tp: "4,650" }
             ],
             daytrade: [
-                { code: "BUMI", name: "Bumi Resources Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Intraday Momentum Breakout", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
-                { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Volume Surge 3x Rata-rata", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
-                { code: "PGAS", name: "Perusahaan Gas Negara Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "MACD Histogram Positif", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" },
-                { code: "BUKA", name: "Bukalapak.com Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Breakout Resistance Minor", entry: "Fast Entry", sl: "Strict SL", tp: "Quick TP" }
+                { code: "BUMI", name: "Bumi Resources Tbk", ind: "Intraday Momentum Breakout", entry: "110 - 112", sl: "107", tp: "118" },
+                { code: "GOTO", name: "GoTo Gojek Tokopedia Tbk", ind: "Volume Surge 3x", entry: "70 - 72", sl: "68", tp: "78" }
             ],
             scalping: [
-                { code: "BRMS", name: "Bumi Resources Minerals", price: "Live Chart", change: "Real-time", isPos: true, ind: "Orderbook Bid Thickening", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
-                { code: "ENRG", name: "Energi Mega Persada Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Fast Scalp Tape Reading", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
-                { code: "MEDC", name: "Medco Energi Internasional", price: "Live Chart", change: "Real-time", isPos: true, ind: "EMA 5 Cross EMA 10", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" },
-                { code: "DEWA", name: "Darma Henwa Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "High Volatility Scalp", entry: "Scalp Bid", sl: "Tick Loss", tp: "Tick Profit" }
+                { code: "BRMS", name: "Bumi Resources Minerals", ind: "Orderbook Bid Thickening", entry: "380 - 386", sl: "372", tp: "402" }
             ],
             bpjs: [
-                { code: "ASII", name: "Astra International Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Closing Strong + Bandarmology", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" },
-                { code: "BBCA", name: "Bank Central Asia Tbk", price: "Live Chart", change: "Real-time", isPos: true, ind: "Accumulation Zone Closing", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" },
-                { code: "UNVR", name: "Unilever Indonesia Tbk", price: "Live Chart", change: "Real-time", isPos: false, ind: "Morning Rebound Setup", entry: "Sore / Closing", sl: "Open Gap SL", tp: "Morning TP" }
+                { code: "ASII", name: "Astra International Tbk", ind: "Closing Strong Accumulation", entry: "5,120 - 5,160", sl: "5,050", tp: "5,325" }
             ]
         };
 
         let currentActiveTab = 'swing';
 
         window.onload = function() {
-            if (localStorage.getItem('hans_auth') === 'true') {
-                showApp();
-            }
+            if (localStorage.getItem('hans_auth') === 'true') showApp();
         }
 
         function handleLogin(e) {
             e.preventDefault();
-            const pass = document.getElementById('passwordInput').value;
-            if (pass === 'hansskuy') {
+            if (document.getElementById('passwordInput').value === 'hansskuy') {
                 localStorage.setItem('hans_auth', 'true');
                 showApp();
             } else {
@@ -249,80 +168,37 @@
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
             loadTable(currentActiveTab);
-            loadMarketSnapshot();
         }
 
         function switchTab(tabKey) {
             currentActiveTab = tabKey;
             document.getElementById('globalSearchInput').value = '';
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
-            });
-
-            document.getElementById(`btn-${tabKey}`).className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-blue-600 text-white shadow-lg shadow-blue-600/30 flex items-center gap-2";
-
-            const titles = {
-                swing: { title: "Rekomendasi Swing Trade", desc: "Fokus akumulasi medium-term dengan konfirmasi volume & MA Golden Cross.", icon: "fa-chart-area" },
-                daytrade: { title: "Rekomendasi Day Trade", desc: "Emitten dengan momentum harian tinggi untuk keluar masuk di hari yang sama.", icon: "fa-bolt" },
-                scalping: { title: "Rekomendasi Scalping Kilat", desc: "Saham high-beta & likuiditas tebal untuk menangkap pergerakan cepat menit-an.", icon: "fa-stopwatch" },
-                bpjs: { title: "Rekomendasi BPJS / BSJP", desc: "Strategi Beli Sore Jual Pagi (BSJP) atau beli santai jelang penutupan market.", icon: "fa-fire" }
-            };
-
-            document.getElementById('tableTitle').innerHTML = `<i class="fa-solid ${titles[tabKey].icon} text-blue-500"></i> ${titles[tabKey].title}`;
-            document.getElementById('tableDesc').innerText = titles[tabKey].desc;
-
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2");
+            document.getElementById(`btn-${tabKey}`).className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2";
             loadTable(tabKey);
         }
 
         function loadTable(tabKey) {
-            const tbody = document.getElementById('tableBody');
-            renderRows(masterStockDatabase[tabKey], tbody);
+            renderRows(masterStockDatabase[tabKey], document.getElementById('tableBody'));
         }
 
         function renderRows(dataArray, targetTbody) {
             targetTbody.innerHTML = '';
             dataArray.forEach(stock => {
                 const row = document.createElement('tr');
-                row.className = "hover:bg-slate-800/40 transition duration-150 border-b border-slate-800/40";
-                
+                row.className = "hover:bg-slate-800/45 transition border-b border-slate-800/40";
                 row.innerHTML = `
-                    <td class="p-4">
-                        <div class="font-bold text-white flex items-center gap-2">
-                            <span class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-xs font-bold border border-blue-500/20">${stock.code.substring(0,2)}</span>
-                            <div>
-                                ${stock.code}
-                                <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
-                            </div>
-                        </div>
+                    <td class="p-4 font-bold text-white">
+                        ${stock.code}
+                        <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
                     </td>
-                    <td class="p-4 font-semibold text-blue-400">
-                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="hover:underline flex items-center gap-1">
-                            <i class="fa-solid fa-chart-line text-xs"></i> Cek Harga Live
-                        </a>
-                    </td>
-                    <td class="p-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-medium border bg-blue-500/10 text-blue-400 border-blue-500/20">
-                            Live Active
-                        </span>
-                    </td>
-                    <td class="p-4 text-xs text-slate-300">
-                        <div class="flex items-center gap-1.5 font-medium text-amber-300">
-                            <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> ${stock.ind}
-                        </div>
-                    </td>
-                    <td class="p-4 font-bold text-blue-400 text-xs bg-blue-500/5 rounded">
-                        <i class="fa-solid fa-crosshairs mr-1"></i> ${stock.entry}
-                    </td>
-                    <td class="p-4 font-semibold text-red-400 text-xs">
-                        ${stock.sl}
-                    </td>
-                    <td class="p-4 font-semibold text-emerald-400 text-xs">
-                        ${stock.tp}
-                    </td>
+                    <td class="p-4 text-xs text-amber-300 font-medium"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> ${stock.ind}</td>
+                    <td class="p-4 font-bold text-blue-400 text-xs">${stock.entry}</td>
+                    <td class="p-4 font-semibold text-red-400 text-xs">${stock.sl}</td>
+                    <td class="p-4 font-semibold text-emerald-400 text-xs">${stock.tp}</td>
                     <td class="p-4 text-center">
-                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition inline-flex items-center gap-1 shadow-lg shadow-blue-600/30">
-                            <span>Open Chart</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        <a href="https://id.tradingview.com/symbols/IDX-${stock.code}/" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition inline-flex items-center gap-1 shadow-md">
+                            <span>Buka Chart Live</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </a>
                     </td>
                 `;
@@ -333,76 +209,15 @@
         function filterAllTables() {
             let input = document.getElementById('globalSearchInput').value.toUpperCase().trim();
             let allStocks = [];
-            
             for (let cat in masterStockDatabase) {
-                masterStockDatabase[cat].forEach(s => {
-                    if(!allStocks.some(existing => existing.code === s.code)) {
-                        allStocks.push(s);
-                    }
-                });
+                masterStockDatabase[cat].forEach(s => { if(!allStocks.some(e => e.code === s.code)) allStocks.push(s); });
             }
-
-            if (input === "") {
-                loadTable(currentActiveTab);
-                return;
-            }
-
-            let filtered = allStocks.filter(s => 
-                s.code.toUpperCase().includes(input) || 
-                s.name.toUpperCase().includes(input) || 
-                s.ind.toUpperCase().includes(input)
-            );
-
+            if (input === "") { loadTable(currentActiveTab); return; }
+            let filtered = allStocks.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
             if (filtered.length === 0 && input.length >= 2) {
-                filtered = [{
-                    code: input,
-                    name: "Custom Searched Emiten IDX",
-                    price: "Live Chart",
-                    change: "Real-time",
-                    isPos: true,
-                    ind: "Custom Live Momentum Screener",
-                    entry: "Area Support Live",
-                    sl: "Cutloss Bawah",
-                    tp: "Target Resistance"
-                }];
+                filtered = [{ code: input, name: "Custom Emiten IDX", ind: "Live Momentum Screener", entry: "Area Support Live", sl: "Custom SL", tp: "Custom TP" }];
             }
-
-            const tbody = document.getElementById('tableBody');
-            renderRows(filtered, tbody);
-        }
-
-        function loadMarketSnapshot() {
-            let gainersHtml = `
-                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                    <span class="font-bold text-white">IHSG (COMPOSITE)</span>
-                    <a href="https://id.tradingview.com/symbols/IDX-COMPOSITE/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                    <span class="font-bold text-white">BBCA <span class="text-slate-400 font-normal text-[11px]">(Bank Central Asia)</span></span>
-                    <a href="https://id.tradingview.com/symbols/IDX-BBCA/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-                <div class="flex justify-between items-center py-2">
-                    <span class="font-bold text-white">BBRI <span class="text-slate-400 font-normal text-[11px]">(Bank Rakyat Indonesia)</span></span>
-                    <a href="https://id.tradingview.com/symbols/IDX-BBRI/" target="_blank" class="text-emerald-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-            `;
-            document.getElementById('topGainersList').innerHTML = gainersHtml;
-
-            let losersHtml = `
-                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                    <span class="font-bold text-white">ADRO <span class="text-slate-400 font-normal text-[11px]">(Adaro Energy)</span></span>
-                    <a href="https://id.tradingview.com/symbols/IDX-ADRO/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-                <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
-                    <span class="font-bold text-white">GOTO <span class="text-slate-400 font-normal text-[11px]">(GoTo Gojek Tokopedia)</span></span>
-                    <a href="https://id.tradingview.com/symbols/IDX-ADRO/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-                <div class="flex justify-between items-center py-2">
-                    <span class="font-bold text-white">JAWA <span class="text-slate-400 font-normal text-[11px]">(Jaya Agra Wattie)</span></span>
-                    <a href="https://id.tradingview.com/symbols/IDX-JAWA/" target="_blank" class="text-blue-400 font-bold hover:underline text-xs">Lihat Live Chart &rarr;</a>
-                </div>
-            `;
-            document.getElementById('topLosersList').innerHTML = losersHtml;
+            renderRows(filtered, document.getElementById('tableBody'));
         }
     </script>
 </body>
