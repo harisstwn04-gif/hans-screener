@@ -51,7 +51,7 @@
                         <h1 class="font-bold text-lg tracking-wide flex items-center gap-2">
                             Hans Screaming Saham <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full uppercase">MASTER PRO</span>
                         </h1>
-                        <p class="text-xs text-slate-400">Advanced Market Screener & Unlimited IDX Integration</p>
+                        <p class="text-xs text-slate-400">Advanced Market Screener & Universal Live Widget</p>
                     </div>
                 </div>
                 <button onclick="handleLogout()" class="bg-slate-800 hover:bg-red-600/20 hover:text-red-400 border border-slate-700 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-2">
@@ -79,9 +79,9 @@
             <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div>
                     <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham Apapun (Global IDX Auto-Update)
+                        <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Emiten Apapun (Auto Live Data)
                     </h3>
-                    <p class="text-xs text-slate-400">Ketik kode emitten apa saja (contoh: PADA, GOTO, ASII, BUMI, dll) untuk langsung generate data live-nya.</p>
+                    <p class="text-xs text-slate-400">Ketik kode emitten apa saja (cth: PADA, GOTO, BBCA) untuk generate langsung.</p>
                 </div>
                 <div class="w-full md:w-80 relative">
                     <input type="text" id="globalSearchInput" onkeyup="handleGlobalSearch(event)" placeholder="Ketik kode saham (cth: PADA)..." 
@@ -90,21 +90,24 @@
                 </div>
             </div>
 
-            <!-- Tab Menu -->
-            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
-                <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2"><i class="fa-solid fa-chart-area"></i> Swing Trade</button>
-                <button onclick="switchTab('daytrade')" id="btn-daytrade" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Day Trade</button>
-                <button onclick="switchTab('scalping')" id="btn-scalping" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-stopwatch"></i> Scalping</button>
-                <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-fire"></i> BPJS / BSJP</button>
+            <!-- Tab Menu untuk Atur Gaya Trading -->
+            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4 items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="switchTab('swing')" id="btn-swing" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-blue-600 text-white shadow-lg flex items-center gap-2"><i class="fa-solid fa-chart-area"></i> Swing Trade</button>
+                    <button onclick="switchTab('daytrade')" id="btn-daytrade" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Day Trade</button>
+                    <button onclick="switchTab('scalping')" id="btn-scalping" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-stopwatch"></i> Scalping</button>
+                    <button onclick="switchTab('bpjs')" id="btn-bpjs" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2"><i class="fa-solid fa-fire"></i> BPJS / BSJP</button>
+                </div>
+                <button onclick="addNewCustomStockPrompt()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-plus"></i> Tambah Manual ke Kategori
+                </button>
             </div>
 
             <!-- Table -->
             <div class="bg-cardbg border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-5 border-b border-slate-800 flex justify-between items-center">
-                    <div>
-                        <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
-                        <p id="tableDesc" class="text-xs text-slate-400">Harga live otomatis dari database & pencarian universal.</p>
-                    </div>
+                <div class="p-5 border-b border-slate-800">
+                    <h3 id="tableTitle" class="font-bold text-lg text-white flex items-center gap-2"><i class="fa-solid fa-chart-area text-blue-500"></i> Rekomendasi Swing Trade</h3>
+                    <p id="tableDesc" class="text-xs text-slate-400">Data live harga real-time dari TradingView untuk setiap emitten.</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -112,7 +115,7 @@
                             <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase border-b border-slate-800">
                                 <th class="p-4">Saham</th>
                                 <th class="p-4">Harga Live & Perubahan</th>
-                                <th class="p-4">Indikator Sinyal</th>
+                                <th class="p-4">Gaya / Indikator</th>
                                 <th class="p-4 text-blue-400">Area Entry</th>
                                 <th class="p-4 text-red-400">Stop Loss (SL)</th>
                                 <th class="p-4 text-emerald-400">Take Profit (TP)</th>
@@ -197,21 +200,39 @@
                 return;
             }
 
-            // Filter dari list kategori aktif, atau buat secara dinamis universal jika tidak ditemukan
             let filtered = currentList.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
             
             if (filtered.length === 0) {
-                // Auto generate emiten universal apa saja yang diketik user
+                // Generate otomatis jika saham diketik bebas agar langsung keluar widget live & plan-nya
                 filtered = [{
                     code: input,
                     name: `Emiten IDX (${input})`,
-                    ind: "Live Universal Screener",
-                    entry: "Cek Orderbook",
-                    sl: "Dynamic SL",
-                    tp: "Dynamic TP"
+                    ind: `Live ${currentActiveTab.toUpperCase()} Screener`,
+                    entry: "Area Support Live",
+                    sl: "Set SL Mandiri",
+                    tp: "Set TP Mandiri"
                 }];
             }
             renderRows(filtered, document.getElementById('tableBody'));
+        }
+
+        function addNewCustomStockPrompt() {
+            let code = prompt("Masukkan Kode Saham (Contoh: PADA, BBCA):");
+            if(!code) return;
+            code = code.toUpperCase().trim();
+            let entry = prompt("Masukkan Area Entry:", "Cek Support");
+            let sl = prompt("Masukkan Stop Loss (SL):", "Atur SL");
+            let tp = prompt("Masukkan Take Profit (TP):", "Atur TP");
+
+            masterStockDatabase[currentActiveTab].push({
+                code: code,
+                name: `Custom Emiten (${code})`,
+                ind: `Manual Input (${currentActiveTab.toUpperCase()})`,
+                entry: entry,
+                sl: sl,
+                tp: tp
+            });
+            loadTable(currentActiveTab);
         }
 
         function renderRows(dataArray, targetTbody) {
@@ -226,7 +247,7 @@
                         <div class="text-[11px] font-normal text-slate-400">${stock.name}</div>
                     </td>
                     <td class="p-4">
-                        <div class="tradingview-widget-container" style="width: 140px; height: 35px;">
+                        <div class="tradingview-widget-container" style="width: 150px; height: 45px;">
                             <div class="tradingview-widget-container__widget" id="${uniqueId}"></div>
                         </div>
                     </td>
@@ -242,23 +263,25 @@
                 `;
                 targetTbody.appendChild(row);
 
+                // Render widget TradingView secara aman dengan jeda waktu render DOM
                 setTimeout(() => {
                     const container = document.getElementById(uniqueId);
-                    if (container && container.innerHTML === '') {
+                    if (container) {
+                        container.innerHTML = ''; // Bersihkan container sebelum diisi
                         const script = document.createElement('script');
                         script.type = 'text/javascript';
                         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
                         script.async = true;
                         script.innerHTML = JSON.stringify({
                             "symbol": `IDX:${stock.code}`,
-                            "width": "140",
+                            "width": "150",
                             "colorTheme": "dark",
                             "isTransparent": true,
                             "locale": "id"
                         });
                         container.appendChild(script);
                     }
-                }, 50);
+                }, 100);
             });
         }
     </script>
