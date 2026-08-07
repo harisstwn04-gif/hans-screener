@@ -81,7 +81,7 @@
         <!-- Content Body -->
         <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
             
-            <!-- BAGIAN 3: TOP GAINERS & LOSERS LIVE SNAPSHOT (SINKRON DENGAN DATABASE) -->
+            <!-- BAGIAN 3: TOP GAINERS & LOSERS LIVE SNAPSHOT -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Top Gainers -->
                 <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
@@ -103,20 +103,20 @@
                 </div>
             </div>
 
-            <!-- BAGIAN 4: PENCARIAN SAHAM GLOBAL (LANGSUNG MASUK TABEL LENGKAP) -->
+            <!-- BAGIAN 4: PENCARIAN SAHAM GLOBAL -->
             <div class="bg-cardbg border border-slate-800 p-5 rounded-2xl shadow-xl">
                 <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div>
                         <h3 class="font-bold text-white text-sm flex items-center gap-2">
                             <i class="fa-solid fa-magnifying-glass text-blue-500"></i> Cari Saham Lainnya / Filter Sinyal
                         </h3>
-                        <p class="text-xs text-slate-400">Ketik kode emitten (cth: TLKM, BBRI, ASII) untuk melihat detail lengkap di tabel.</p>
+                        <p class="text-xs text-slate-400">Ketik kode emitten (cth: TLKM, BBRI, ASII, JAWA) untuk melihat detail lengkap di tabel.</p>
                     </div>
                     <div class="w-full md:w-80 relative">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-xs">
                             <i class="fa-solid fa-search"></i>
                         </span>
-                        <input type="text" id="globalSearchInput" onkeyup="filterAllTables()" placeholder="Ketik kode saham..." 
+                        <input type="text" id="globalSearchInput" onkeyup="filterAllTables()" placeholder="Ketik kode atau nama saham..." 
                             class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
                     </div>
                 </div>
@@ -184,9 +184,8 @@
 
     </div>
 
-    <!-- JAVASCRIPT LOGIC LENGKAP DAN AKURAT -->
+    <!-- JAVASCRIPT LOGIC LENGKAP -->
     <script>
-        // Database Saham Terintegrasi Lengkap (Mencakup Semua Kategori + Saham Tambahan)
         const masterStockDatabase = {
             swing: [
                 { code: "JAWA", name: "Jaya Agra Wattie Tbk", price: "130", change: "+4.84%", isPos: true, ind: "MACD Cross + Vol Spike", entry: "126 - 130", sl: "121", tp: "142" },
@@ -246,9 +245,9 @@
             loadMarketSnapshot();
         }
 
-        // Switch Kategori Tab
         function switchTab(tabKey) {
             currentActiveTab = tabKey;
+            document.getElementById('globalSearchInput').value = '';
             
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.className = "tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition duration-200 bg-cardbg text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2";
@@ -269,11 +268,8 @@
             loadTable(tabKey);
         }
 
-        // Load Tabel Berdasarkan Kategori
         function loadTable(tabKey) {
             const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            
             const data = masterStockDatabase[tabKey];
             renderRows(data, tbody);
         }
@@ -326,12 +322,10 @@
             });
         }
 
-        // Filter Global untuk Mencari Saham Apapun dari Semua Kategori
         function filterAllTables() {
-            let input = document.getElementById('globalSearchInput').value.toUpperCase();
+            let input = document.getElementById('globalSearchInput').value.toUpperCase().trim();
             let allStocks = [];
             
-            // Gabungkan seluruh saham dari semua kategori
             for (let cat in masterStockDatabase) {
                 masterStockDatabase[cat].forEach(s => {
                     if(!allStocks.some(existing => existing.code === s.code)) {
@@ -340,17 +334,26 @@
                 });
             }
 
-            let filtered = allStocks.filter(s => s.code.includes(input) || s.name.toUpperCase().includes(input));
+            if (input === "") {
+                loadTable(currentActiveTab);
+                return;
+            }
+
+            let filtered = allStocks.filter(s => 
+                s.code.toUpperCase().includes(input) || 
+                s.name.toUpperCase().includes(input) || 
+                s.ind.toUpperCase().includes(input)
+            );
+
             const tbody = document.getElementById('tableBody');
             
             if (filtered.length > 0) {
                 renderRows(filtered, tbody);
             } else {
-                tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400"> Saham tidak ditemukan dalam database utama.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400"> Saham atau indikator "${input}" tidak ditemukan dalam database.</td></tr>`;
             }
         }
 
-        // Generate Top Gainers & Losers secara Akurat dari Seluruh Database Saham
         function loadMarketSnapshot() {
             let allStocks = [];
             for (let cat in masterStockDatabase) {
@@ -361,16 +364,13 @@
                 });
             }
 
-            // Ubah string persentase change ke float untuk di-sorting
             allStocks.forEach(s => {
                 s.numericChange = parseFloat(s.change.replace('%', '').replace('+', ''));
             });
 
-            // Urutkan dari terbesar (Gainers) dan terkecil (Losers)
             let sortedByGain = [...allStocks].sort((a, b) => b.numericChange - a.numericChange);
             let sortedByLoss = [...allStocks].sort((a, b) => a.numericChange - b.numericChange);
 
-            // Render Top 3 Gainers
             let gainersHtml = '';
             for (let i = 0; i < Math.min(3, sortedByGain.length); i++) {
                 let g = sortedByGain[i];
@@ -383,7 +383,6 @@
             }
             document.getElementById('topGainersList').innerHTML = gainersHtml;
 
-            // Render Top 3 Losers
             let losersHtml = '';
             for (let i = 0; i < Math.min(3, sortedByLoss.length); i++) {
                 let l = sortedByLoss[i];
